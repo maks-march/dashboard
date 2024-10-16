@@ -188,6 +188,14 @@ main .files {
   }
 }
 
+.file_item a:hover {
+  color: rgba(66, 78, 92, 1);
+}
+
+.file_item a:active {
+  color: #C82525;
+}
+
 .file_item button:hover {
   box-shadow: 0px 2.5px 5px 1px rgba(0, 0, 0, 0.5);
   transform: translateY(-1px);

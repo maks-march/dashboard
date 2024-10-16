@@ -1,0 +1,261 @@
+
+
+:root {
+  --main-red: #C82525;
+  --main-white: #f4f4f4;
+  --border-gray: #ccc;
+  --secondary-gray: #E7E5E5;
+  --text: #000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  color: var(--main-white);
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+
+.active_block {
+  display: flex;
+}
+
+.unactive_block {
+  display: none;
+}
+
+.window_unactive {
+  transform: translateY(-100vh);
+  transition: all 2s ease-in-out;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--main-white);
+  overflow: hidden;
+}
+
+.start_window {
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background-color: #C82525;
+}
+
+.start_window .column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 30%;
+  h1 {
+    font-size: 8vh;
+    font-weight: 700;
+    margin-bottom: 5vh;
+  }
+  h2 {
+    font-size: 5vh;
+    display: block;
+    text-wrap: nowrap;
+  }
+}
+
+.column:nth-child(2) {
+  justify-content: flex-end;
+  footer {
+    align-self: center;
+    width: 100vw;
+    height: 5%;
+    background-color: var(--main-white);
+  }
+}
+
+.column:nth-child(3) {
+  padding-right: 5vw;
+  align-items: flex-end;
+}
+
+.start {
+  background-color: var(--main-white);
+  color: #C82525;
+  font-size: 10vh;
+  width: 90%;
+  height: 15%;
+  border-radius: 30px;
+  align-self: center;
+  margin-bottom: 10vh;
+}
+
+.start:hover {
+  box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
+}
+
+.bubbles {
+  width: 100%;
+  margin-top: 5%;
+}
+
+body header {
+  background-color: var(--main-red);
+  width: 100vw;
+  height: 8vh;
+  display: flex;
+  justify-content: flex-end;
+  h1 {
+    font-size: 5vh;
+    margin-right: 5vw;
+  }
+}
+
+main {
+  width: 100vw;
+  height: 92vh;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+main .files {
+  margin-top: 5vh;
+  width: 75%;
+  height: 80%;
+  background-color: var(--secondary-gray);
+  border-radius: 30px;
+  overflow: hidden;
+  * {
+    color: var(--text)
+  }
+  .title {
+    width:100%;
+    height: 6vh;
+    text-align:left;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5vw;
+    padding-right: 2vw;
+    border-bottom: var(--text) solid 1px;
+  }
+  .scroller {
+    width: 100%;
+    height: 92%;
+    overflow-y: scroll;
+  }
+}
+
+.title input {
+  height: 70%;
+  width: 20%;
+  padding-left: 12px;
+  outline: none;
+  border: 0;
+  background-color: var(--main-white);
+  border-radius: 30px;
+}
+
+.scroller .file_item{
+  width:100%;
+  height: 6vh;
+  padding-right: 6vw;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5vw;
+  border-bottom: var(--border-gray) solid 1px;
+  button {
+    width: 10%;
+    height: 80%;
+    border-radius: 30px;
+    border: var(--main-red) solid 1px;
+  }
+}
+
+.file_item button:hover {
+  box-shadow: 0px 2.5px 5px 1px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.scroller::-webkit-scrollbar {
+  width: 0px;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background: var(--main-white);
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background-color: var(--main-red); 
+  border-radius: 20px;
+}
+
+main .navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2vh;
+  width: 65%;
+  button {
+    width: 12vw;
+    height: 4vh;
+    font-size: 2vh;
+    border-radius: 30px;
+    background-color: var(--main-red);
+  }
+}
+
+.navigation button:hover {
+  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+
+#upload-zone {
+  margin: 20px auto;
+  padding: 50px;
+  border: 2px dashed var(--border-gray);
+  background-color: var(--main-white);
+  width: 80%;
+}
+
+#upload-zone p {
+  font-size: 1.2em;
+}
+
+#visualization {
+  margin: 30px 0;
+}
+
+#cities {
+  margin-top: 20px;
+}
+
+#cities button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: var(--main-red);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cities button:hover {
+  background-color: var(--main-red);
+}

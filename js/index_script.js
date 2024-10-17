@@ -6,7 +6,14 @@ document.getElementById('file-input').addEventListener('change', function(event)
 });
 
 
-
+var result = location.search.substring(1,9);
+if (result == "no_start") {
+    
+    const window = document.getElementById('start_window');
+    window.classList.add('unactive_block')
+    
+    console.log(result == "no_start");
+}
 
 function delStartWindow() {
     const window = document.getElementById('start_window');

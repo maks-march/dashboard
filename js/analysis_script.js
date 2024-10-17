@@ -6,12 +6,10 @@ const chart_payment = document.getElementById('chart_payment').getContext('2d');
 const chart_male = document.getElementById('chart_male').getContext('2d');
 
 
-let name = "Екатеринбург 2014"
+let name = decodeURI(location.search.split('name=')[1].split(';')[0]);
 
 const title = document.getElementById('title');
 title.innerText = title.innerText + ' '+ name
-
-
 
 
 

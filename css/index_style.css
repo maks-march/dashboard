@@ -18,12 +18,18 @@
   justify-content: center;
 }
 
+h1, h2, h3, h4 {
+  text-align: center;
+}
+
 button {
   border: 0;
+  cursor: pointer;
 }
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 button:hover{

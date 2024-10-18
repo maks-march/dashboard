@@ -2,10 +2,12 @@
 
 :root {
   --main-red: #C82525;
+  --main-green: #6FCB68;
   --main-white: #f4f4f4;
   --border-gray: #ccc;
   --secondary-gray: #E7E5E5;
   --text: #000;
+  --background: #C9C9C9;
 }
 
 * {
@@ -218,7 +220,7 @@ main .navigation {
   display: flex;
   justify-content: space-between;
   margin-top: 2vh;
-  width: 65%;
+  width: 692px;
   button {
     width: 12vw;
     height: 4vh;
@@ -228,22 +230,104 @@ main .navigation {
   }
 }
 
-.navigation button:hover {
+.add_files-into_file{
+  margin: 0;
+  padding: 0;
+  width: 337px;
+  height: 59px;
+  font-size: 3vh;
+  background-color: var(--main-red);
+  border-radius: 30px;
+  margin-left: 911px;
+}
+
+
+#file-input {
+  background-color: var(--main-green);
+  width: 100px;
+  border-radius: 40px;
+  font-size: 3vh;
+}
+
+#select_file{
+  width: 337px;
+  height: 67px;
+}
+
+#check{
+  background-color: var(--main-green);
+  width: 268px;
+  height: 67px;
+  font-size: 3vh;
+}
+
+.navigation button:hover,
+.add_files-into_file:hover {
   box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
   transform: translateY(-2px);
 }
 
+.upload-files-zone {
+  margin: 72px auto 52px auto;
+  width: 1248px;
+  height: 646px;
+  background-color: var(--secondary-gray);
+  border-radius: 35px;
+}
+
+.list_and_upzone {
+  margin: 43px 0 0 58px;
+  width: 1139px;
+  height: 572px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+ul.list {
+  width: 380px;
+  height: 572px;
+  background-color: var(--background);
+  border-radius: 30px;
+}
+
+.text_file p{
+  color: var(--text);
+  list-style-type: none;
+  margin: 22px 0 22px 13px;
+  font-size: 2.5vh;
+
+}
+
+.text_file {
+  margin: 0px;
+  border-bottom: 1px solid black;
+}
+
+.upzone_and_buttons{
+  width: 692px;
+  height: 572px;
+}
 
 #upload-zone {
-  margin: 20px auto;
-  padding: 50px;
-  border: 2px dashed var(--border-gray);
-  background-color: var(--main-white);
-  width: 80%;
+  width: 692px;
+  height: 483px; 
+  border: 2px dashed var(--text);
+  border-radius: 30px;
+  background-color: var(--background);
+}
+
+.image{
+  padding: 0;
+  margin: 0;
+  margin: 41px 193px 0 193px;
 }
 
 #upload-zone p {
-  font-size: 1.2em;
+  color: var(--text);
+  font-size: 2.5vh;
+  margin: 49px auto 0 170px;
+  width: 429px;
 }
 
 #visualization {

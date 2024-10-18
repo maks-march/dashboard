@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JustImport</title>
     <link rel="stylesheet" href="css/index_style.css">
-    <link rel="stylesheet" href="css/outline-settings.css">
-    <link rel="stylesheet" href="css/outline.css">
+    <!-- <link rel="stylesheet" href="css/outline-settings.css">
+    <link rel="stylesheet" href="css/outline.css"> -->
 </head>
 <body>
     <div class="start_window" id ='start_window' style = "display:none">
@@ -216,29 +216,48 @@
 
     <main id = "add" class = "unactive_block">
         <div class="upload-files-zone">
-            <ul class="list">
-                <li>
-                    <p>Название файла</p>
-                </li>
-            </ul>
+            <div class="list_and_upzone">
+                <ul class="list">
+                    <li class="text_file">
+                        <p>Название файла</p>
+                    </li>
+                    <li class="text_file">
+                        <p>Имя</p>
+                    </li>
+                    <li class="text_file">
+                        <p>Имя</p>
+                    </li>
+                    <li class="text_file">
+                        <p>Имя</p>
+                    </li>
+                    <li class="text_file">
+                        <p>Имя</p>
+                    </li>
+                    
+                </ul>
+                <div class="upzone_and_buttons">
+                    
+                    <div id="upload-zone">
+                        <img class="image" src="/img/image.svg" alt="картинка файла"
+                        width="306" height="270">    
+                        <p>Перетащите элементы сюда</p>
+                    </div>
 
-
-            <div id="upload-zone">
-                <p>Перетащите элементы сюда</p>
-                <input type="file" id="file-input" multiple>
-            </div>
-
-
-            <div class="navigation">
-                <button class="check">
-                    Готово
-                </button>
-                <button onclick = "moveToFiles()" class="add_files">
-                    К файлам
-                </button>
-            </div>
+                    <div class="navigation">
+                        <button id="check">
+                            Готово
+                        </button>
+                        
+                        <button id="select_file">
+                            <input type="file" id="file-input" multiple>
+                        </button>
+                    </div> 
+                </div>    
+            </div> 
         </div>
-
+        <button onclick = "moveToFiles()" class="add_files-into_file">
+            К файлам
+        </button>
     </main>
 
 

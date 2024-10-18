@@ -1,8 +1,10 @@
 
 
 :root {
+  --main-background: #C9C9C9;
   --main-red: #C82525;
   --main-white: #f4f4f4;
+  --main-green: #6FCB68;
   --border-gray: #ccc;
   --secondary-gray: #E7E5E5;
   --text: #000;
@@ -246,9 +248,9 @@ main .files {
 
 #add .navigation {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 2vh;
-  width: 75%;
+  width: 692px;
   button {
     width: 12vw;
     height: 5vh;
@@ -256,6 +258,9 @@ main .files {
     border-radius: 30px;
     background-color: var(--main-red);
   }
+  button.check{
+    background-color: var(--main-green);
+  }  
 }
 
 .navigation button:hover {
@@ -304,4 +309,90 @@ main .files {
 
 .unactive_block {
   display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container_input{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1248px;
+  height: 646px;
+  background-color: var(--secondary-gray);
+  border-radius: 35px;
+  margin-top: 72px;
+}
+
+.scroll{
+  margin: 0 0 0 58px;
+  width: 380px;
+  height: 572px;
+  background-color:var(--main-background);
+  border-radius: 30px;
+  /* overflow-y: auto;
+  list-style-type: none; */
+}
+
+
+.zone_and_navigator{
+  width: 692px;
+  margin: 0 58px 0 0;
+}
+
+#upload-zone{
+  width: 692px;
+  height: 483px;
+  padding: 0;
+  border-radius: 30px;
+  background-color: var(--main-background);
+  border-color: black;
+}
+
+#add button.add_files {
+  width: 15vw;
+  height: 5vh;
+  font-size: 3vh;
+  border-radius: 30px;
+  background-color: var(--main-red);
+  margin: 62px 0 0 940px;
+}
+
+button.add_files:hover {
+  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+div#add{
+  width: 15vw;
+  height: 5vh;
+  font-size: 3vh;
+  display: flex;
+  background-color: var(--main-red);
+  border-radius: 30px;
+}
+
+div#add:hover{
+  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.navigation input{
+  display: none;
+}
+
+#file-input{
+  display: none; 
 }

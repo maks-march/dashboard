@@ -90,32 +90,34 @@
 
 
     <main id = "add" class = "unactive_block">
-        <div class="container_input">
-            <div class="scroll">
-                
-            </div>
-            <div class="zone_and_navigator">
-                <div id="upload-zone">
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <label for="file-input">Перетащите элементы сюда
-                        </label>
-                        <input type="file" id="file-input" multiple >
-                    </form>
+        <div class="container">
+            
+            <div class="scroller" id="files_list">
+                <div class="title">
+                    Загруженные файлы
                 </div>
-                <div class="navigation">
-                    <button class="check">
+            </div>
+            <form id = 'upload' action="" method="post" enctype="multipart/form-data">
+                <label class = "upload_zone" for="file_input">
+                    <span id ='hint'>Перетащите элементы сюда</span>
+                </label>
+                <input type="file"  required id="file_input" name="uploadfile[]" multiple>
+                <div class="controls">
+                    <button class="check" id = "ready">
                         Готово
                     </button>
-                    <label for="images">
-                        <div id ="add">Загрузить файлы</div>
+                    <label for="file_input">
+                        Загрузить файлы
                     </label>
-                    <input type="file" name="uploadfile[]" required id="images" accept="image/png, image/jpeg" class ="forFile" multiple>
                 </div>
-            </div>
+            </form>
+            
         </div>
-        <button onclick = "moveToFiles()" class="add_files">
-            К файлам
-        </button>    
+        <div class="navigation">
+            <button onclick = "moveToFiles()" class="add_files">
+                К файлам
+            </button> 
+        </div>
     </main>
 
 

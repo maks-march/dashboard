@@ -1,4 +1,38 @@
+/*
+Правила - на вскидку
+для стиля используем в основном классы, если у элемента есть айди используем его, но такие элементы используются в коде поэтому свои айди не пиши
+классы называем camel_case ом
+называй через переводчик если не знаешь слово
+не используем px в размерах элементов в шрифте используем vh
+border-radius 30px
+цвета записывем в root
+используй flex
+для всех элементов с display: flex прописанно центрирование
+если нужно написать что-то для всех тэгов - например убрать стандартный стиль - делай это в начале файла
+элементы идут в таком порядке в каком они в html
+используй вложенность
+.class {
+  ...
+  button {
 
+  }
+  .container {
+
+  }
+}
+
+.class button a {
+
+  span {
+
+  }
+}
+
+используй мета классы :hover после стиля стандартного элемента
+стили - флаги которые меняются в js надо оставить в конце файла 
+никакого auto
+margin и padding используй с уточнением -top -bottom -right -left если можно без них - делай без них через justify-content:space-between
+*/
 
 :root {
   --main-background: #C9C9C9;
@@ -19,7 +53,7 @@
   align-items: center;
   justify-content: center;
 }
-
+/* тут можно убрать стандартные стили */
 h1, h2, h3, h4 {
   text-align: center;
 }
@@ -36,6 +70,11 @@ a {
 
 button:hover{
   cursor: pointer;
+}
+
+.file_item .analysis:hover, .delete:hover, .navigation button:hover, .controls button:hover, .controls label:hover {
+  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
 }
 
 .window_unactive {
@@ -191,7 +230,6 @@ main .files {
   }
 }
 
-
 .delete {
   width: 40%;
   height: 80%;
@@ -214,10 +252,6 @@ main .files {
   color: #C82525;
 }
 
-.file_item .analysis:hover, .delete:hover {
-  box-shadow: 0px 2.5px 5px 1px rgba(0, 0, 0, 0.5);
-  transform: translateY(-1px);
-}
 
 .scroller::-webkit-scrollbar {
   width: 0px;
@@ -232,7 +266,7 @@ main .files {
   border-radius: 20px;
 }
 
-#files .navigation {
+.navigation {
   display: flex;
   justify-content: flex-start;
   margin-top: 2vh;
@@ -246,153 +280,97 @@ main .files {
   }
 }
 
-#add .navigation {
+
+
+
+#add .container {
+  margin-top: 5vh;
+  width: 75%;
+  height: 80%;
+  background-color: var(--secondary-gray);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  * {
+    color: var(--text)
+  }
+}
+
+#add .container .scroller {
+  width: 35%;
+  height: 92%;
+  overflow-y: scroll;
+  background-color: var(--border-gray);
+  border-radius: 30px;
+  .title {
+    background-color: var(--border-gray);
+    position: sticky;
+    top: 0;
+    font-size: 2.5vh;
+  }
+  .title, .list_item {
+    width:100%;
+    height: 6vh;
+    padding-right: 6vw;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2vw;
+    border-bottom: var(--text) solid 1px;
+  }
+}
+
+#add .container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+  height: 92%;
+  .upload_zone { 
+    display: flex;
+    width: 100%;
+    height: 80%;
+    border: 2px dashed var(--text);
+    background-color: var(--main-background);
+    border-radius: 30px;
+    #hint {
+      font-size: 3vh;
+    }
+  }
+  #file_input {
+    display: none;
+  }
+}
+
+#add .container form .controls {
   display: flex;
   justify-content: space-between;
   margin-top: 2vh;
-  width: 692px;
-  button {
-    width: 12vw;
-    height: 5vh;
+  width: 100%;
+  button, label {
+    display: flex;
+    width: 16vw;
+    height: 6vh;
     font-size: 3vh;
     border-radius: 30px;
+    color: var(--main-white);
     background-color: var(--main-red);
   }
-  button.check{
+  button {
     background-color: var(--main-green);
-  }  
+  }
 }
 
-.navigation button:hover {
-  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
-  transform: translateY(-2px);
+#add .navigation {
+  justify-content: flex-end;
 }
 
-
-#upload-zone {
-  margin: 20px auto;
-  padding: 50px;
-  border: 2px dashed var(--border-gray);
-  background-color: var(--main-white);
-  width: 80%;
-}
-
-#upload-zone p {
-  font-size: 1.2em;
-}
-
-#visualization {
-  margin: 30px 0;
-}
-
-#cities {
-  margin-top: 20px;
-}
-
-#cities button {
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: var(--main-red);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#cities button:hover {
-  background-color: var(--main-red);
-}
-
+/* оставить в конце */
 .active_block {
   display: flex;
 }
 
 .unactive_block {
   display: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.container_input{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1248px;
-  height: 646px;
-  background-color: var(--secondary-gray);
-  border-radius: 35px;
-  margin-top: 72px;
-}
-
-.scroll{
-  margin: 0 0 0 58px;
-  width: 380px;
-  height: 572px;
-  background-color:var(--main-background);
-  border-radius: 30px;
-  /* overflow-y: auto;
-  list-style-type: none; */
-}
-
-
-.zone_and_navigator{
-  width: 692px;
-  margin: 0 58px 0 0;
-}
-
-#upload-zone{
-  width: 692px;
-  height: 483px;
-  padding: 0;
-  border-radius: 30px;
-  background-color: var(--main-background);
-  border-color: black;
-}
-
-#add button.add_files {
-  width: 15vw;
-  height: 5vh;
-  font-size: 3vh;
-  border-radius: 30px;
-  background-color: var(--main-red);
-  margin: 62px 0 0 940px;
-}
-
-button.add_files:hover {
-  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
-  transform: translateY(-2px);
-}
-
-div#add{
-  width: 15vw;
-  height: 5vh;
-  font-size: 3vh;
-  display: flex;
-  background-color: var(--main-red);
-  border-radius: 30px;
-}
-
-div#add:hover{
-  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
-  transform: translateY(-2px);
-}
-
-.navigation input{
-  display: none;
-}
-
-#file-input{
-  display: none; 
 }

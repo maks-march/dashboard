@@ -53,6 +53,7 @@ margin и padding используй с уточнением -top -bottom -right
   align-items: center;
   justify-content: center;
 }
+
 /* тут можно убрать стандартные стили */
 h1, h2, h3, h4 {
   text-align: center;
@@ -66,13 +67,16 @@ button {
 a {
   text-decoration: none;
   cursor: pointer;
+  color: var(--main-white);
+  text-align: center;
+  align-content: center;
 }
 
 button:hover{
   cursor: pointer;
 }
 
-.file_item .analysis:hover, .delete:hover, .navigation button:hover, .controls button:hover, .controls label:hover {
+.file_item .analysis:hover, .delete:hover, .navigation a:hover, .controls button:hover, .controls label:hover {
   box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
   transform: translateY(-2px);
 }
@@ -171,6 +175,7 @@ main {
   height: 92vh;
   flex-direction: column;
   justify-content: flex-start;
+  display: flex;
 }
 
 main .files {
@@ -271,7 +276,7 @@ main .files {
   justify-content: flex-start;
   margin-top: 2vh;
   width: 75%;
-  button {
+  a {
     width: 16vw;
     height: 6vh;
     font-size: 3vh;
@@ -280,93 +285,31 @@ main .files {
   }
 }
 
-
-
-
-#add .container {
-  margin-top: 5vh;
-  width: 75%;
-  height: 80%;
-  background-color: var(--secondary-gray);
-  border-radius: 30px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  * {
-    color: var(--text)
-  }
-}
-
-#add .container .scroller {
-  width: 35%;
-  height: 92%;
-  overflow-y: scroll;
-  background-color: var(--border-gray);
-  border-radius: 30px;
-  .title {
-    background-color: var(--border-gray);
-    position: sticky;
-    top: 0;
-    font-size: 2.5vh;
-  }
-  .title, .list_item {
-    width:100%;
-    height: 6vh;
-    padding-right: 6vw;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 2vw;
-    border-bottom: var(--text) solid 1px;
-  }
-}
-
-#add .container form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
-  height: 92%;
-  .upload_zone { 
-    display: flex;
-    width: 100%;
-    height: 80%;
-    border: 2px dashed var(--text);
-    background-color: var(--main-background);
-    border-radius: 30px;
-    #hint {
-      font-size: 3vh;
-    }
-  }
-  #file_input {
-    display: none;
-  }
-}
-
-#add .container form .controls {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2vh;
-  width: 100%;
-  button, label {
-    display: flex;
-    width: 16vw;
-    height: 6vh;
-    font-size: 3vh;
-    border-radius: 30px;
-    color: var(--main-white);
-    background-color: var(--main-red);
-  }
-  button {
-    background-color: var(--main-green);
-  }
-}
-
-#add .navigation {
-  justify-content: flex-end;
-}
-
+<<<<<<< Updated upstream
 /* оставить в конце */
+=======
+#add .navigation {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 2vh;
+  width: 75%;
+  button {
+    width: 12vw;
+    height: 5vh;
+    font-size: 3vh;
+    border-radius: 30px;
+    background-color: var(--main-red);
+  }
+}
+
+.navigation button:hover {
+  box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+
+
+>>>>>>> Stashed changes
 .active_block {
   display: flex;
 }

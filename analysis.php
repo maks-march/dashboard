@@ -12,7 +12,7 @@
     </header>
     <main id="graphs">
         <div class="navigation">
-            <a href="index.html?no_start">
+            <a href="index.php?no_start">
                 <button onclick = "moveToFiles()" class="add_files">
                     К файлам
                 </button>

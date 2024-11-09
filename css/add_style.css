@@ -1,0 +1,183 @@
+
+:root {
+    --main-background: #C9C9C9;
+    --main-red: #C82525;
+    --main-white: #f4f4f4;
+    --main-green: #6FCB68;
+    --border-gray: #ccc;
+    --secondary-gray: #E7E5E5;
+    --text: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    /* color: var(--main-white); */
+    align-items: center;
+    justify-content: center;
+}
+
+/* тут можно убрать стандартные стили */
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--main-white);
+    text-align: center;
+    align-content: center;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.navigation a:hover, .controls button:hover, .controls label:hover {
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--main-white);
+    overflow: hidden;
+}
+
+body header {
+    background-color: var(--main-red);
+    width: 100vw;
+    height: 8vh;
+    display: flex;
+    justify-content: flex-end;
+    h1 {
+      font-size: 5vh;
+      margin-right: 5vw;
+    }
+}
+
+main {
+    display: flex;
+    width: 100vw;
+    height: 92vh;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#add .container {
+    margin-top: 5vh;
+    width: 75%;
+    height: 80%;
+    background-color: var(--secondary-gray);
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    * {
+      color: var(--text)
+    }
+}
+
+#add .container .scroller {
+    width: 35%;
+    height: 92%;
+    overflow-y: scroll;
+    background-color: var(--border-gray);
+    border-radius: 30px;
+    .title {
+        background-color: var(--border-gray);
+        position: sticky;
+        top: 0;
+        font-size: 2.5vh;
+    }
+    .title, .list_item {
+        width:100%;
+        height: 6vh;
+        padding-right: 6vw;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 2vw;
+        border-bottom: var(--text) solid 1px;
+    }
+}
+
+#add .container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50%;
+    height: 92%;
+    .upload_zone { 
+        display: flex;
+        width: 100%;
+        height: 80%;
+        border: 2px dashed var(--text);
+        background-color: var(--main-background);
+        border-radius: 30px;
+        #hint {
+            font-size: 3vh;
+        }
+    }
+    #file_input {
+        display: none;
+    }
+}
+
+#add .container form .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+    width: 100%;
+    button, label {
+        display: flex;
+        width: 16vw;
+        height: 6vh;
+        font-size: 3vh;
+        border-radius: 30px;
+        color: var(--main-white);
+        background-color: var(--main-red);
+    }
+    button {
+        background-color: var(--main-green);
+    }
+}
+
+.scroller::-webkit-scrollbar {
+    width: 5px;
+}
+  
+.scroller::-webkit-scrollbar-track {
+    width: 5px;
+
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background-color: var(--main-red); 
+    border-radius: 20px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2vh;
+    width: 75%;
+    a {
+        width: 16vw;
+        height: 6vh;
+        font-size: 3vh;
+        border-radius: 30px;
+        background-color: var(--main-red);
+    }
+}

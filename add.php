@@ -84,7 +84,10 @@
                 
                     return Array('filename' => $filename.".".$filetype);
             }
-            
+
+            function transfer_files($names) {
+                
+            }
 
             if(isset($_FILES['uploadfile']) && !empty($_FILES['uploadfile']['name'])){
                 $files = toArrayFiles($_FILES['uploadfile']);
@@ -97,7 +100,7 @@
                         array_push($tables, $result['filename']);
                     }
                 }
-                
+                transfer_files($tables);
             }
                 
         ?>

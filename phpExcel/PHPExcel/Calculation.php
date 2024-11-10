@@ -3345,21 +3345,26 @@ class PHPExcel_Calculation
                     //    Should only be applied to the actual cell column, not the worksheet name
 
                     //    If the last entry on the stack was a : operator, then we have a cell range reference
-                    $testPrevOp = $stack->last(1);
-                    if ($testPrevOp['value'] == ':') {
-                        //    If we have a worksheet reference, then we're playing with a 3D reference
-                        if ($matches[2] == '') {
-                            //    Otherwise, we 'inherit' the worksheet reference from the start cell reference
-                            //    The start of the cell range reference should be the last entry in $output
-                            $startCellRef = $output[count($output)-1]['value'];
-                            preg_match('/^'.self::CALCULATION_REGEXP_CELLREF.'$/i', $startCellRef, $startMatches);
-                            if ($startMatches[2] > '') {
-                                $val = $startMatches[2].'!'.$val;
+                    if (null !== ($stack->last(1))) {
+                        $testPrevOp = $stack->last(1);
+                        if ($testPrevOp['value'] == ':') {
+                            //    If we have a worksheet reference, then we're playing with a 3D reference
+                            if ($matches[2] == '') {
+                                //    Otherwise, we 'inherit' the worksheet reference from the start cell reference
+                                //    The start of the cell range reference should be the last entry in $output
+                                $startCellRef = $output[count($output)-1]['value'];
+                                preg_match('/^'.self::CALCULATION_REGEXP_CELLREF.'$/i', $startCellRef, $startMatches);
+                                if ($startMatches[2] > '') {
+                                    $val = $startMatches[2].'!'.$val;
+                                }
+                            } else {
+                                return $this->raiseFormulaError("3D Range references are not yet supported");
                             }
-                        } else {
-                            return $this->raiseFormulaError("3D Range references are not yet supported");
                         }
+                    } else {
+                        throw new Exception('Smt went wrong!!!');
                     }
+
 
                     $output[] = array('type' => 'Cell Reference', 'value' => $val, 'reference' => $val);
 //                    $expectingOperator = FALSE;

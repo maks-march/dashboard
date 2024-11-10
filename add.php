@@ -1,9 +1,9 @@
 <?php
     include "conn.php";
     session_start();
-    setcookie('auth', true, time() + 3600);
-    setcookie('log', 'user1', time() + 3600);
-    setcookie('id', '0', time() + 3600);
+    if (!isset($_COOKIE['log'])) {
+        header('Location:index.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +57,12 @@
                 return $file_array;
             }
 
-            function upload_file($id, $user, $file, $upload_dir= 'files', $allowed_types= array('xls', 'xlsm', 'xlsx')){
+            function upload_file($id, $user, $file, $upload_dir= 'files', $allowed_types= array('xls', 'xlsx')){
                 
                 $filename = $user."_".$id;
                 $n = explode('.', $file['name']);
                 $filetype = array_pop($n);
-                $blacklist = array(".php", ".phtml", ".php3", ".php4", ".py");
+                $blacklist = array(".php", ".phtml", ".php3", ".php4", ".py", ".zip");
                 $ext = substr($filename, strrpos($filename,'.'), strlen($filename)-1);
                 if(in_array($ext,$blacklist)){
                     return array('error' => 'Запрещено загружать исполняемые файлы');}
@@ -82,25 +82,28 @@
                 if(!move_uploaded_file($file['tmp_name'],$upload_dir.$filename.".".$filetype))
                     return array('error' => 'При загрузке возникли ошибки. Попробуйте ещё раз.');
                 
-                    return Array('filename' => $filename.".".$filetype);
+                    return Array('filename' =>  $filename.".".$filetype, 'name' => explode('.', $file['name'])[0]);
             }
 
-            function transfer_files($names) {
-                
+            function transfer_files($tables, $conn) {
+                foreach ($tables as $key => $table) {
+                    include "transfer_to_SQL.php";
+                    to_SQL($table, $conn);
+                }
             }
-
+            
             if(isset($_FILES['uploadfile']) && !empty($_FILES['uploadfile']['name'])){
                 $files = toArrayFiles($_FILES['uploadfile']);
                 $tables = array();
                 for ($i=0; $i < count($files); $i++) { 
-                    $result = upload_file($i, $_COOKIE['id'], $files[$i]);
+                    $result = upload_file($i, $_COOKIE['log'], $files[$i]);
                     if(isset($result['error'])){
                         echo $result['error'];
                     }else{
-                        array_push($tables, $result['filename']);
+                        array_push($tables, $result);
                     }
                 }
-                transfer_files($tables);
+                transfer_files($tables, $conn);
             }
                 
         ?>

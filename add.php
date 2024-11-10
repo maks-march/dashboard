@@ -1,9 +1,9 @@
 <?php
     include "conn.php";
     session_start();
-    setcookie('auth', true, time() + 3600);
-    setcookie('log', 'user1', time() + 3600);
-    setcookie('id', '0', time() + 3600);
+    if (!isset($_COOKIE['log'])) {
+        header('Location:index.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +96,7 @@
                 $files = toArrayFiles($_FILES['uploadfile']);
                 $tables = array();
                 for ($i=0; $i < count($files); $i++) { 
-                    $result = upload_file($i, $_COOKIE['id'], $files[$i]);
+                    $result = upload_file($i, $_COOKIE['log'], $files[$i]);
                     if(isset($result['error'])){
                         echo $result['error'];
                     }else{

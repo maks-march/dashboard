@@ -23,7 +23,7 @@ function to_SQL($table, $conn) {
         $columns = array_keys($sheet->getColumnDimensions());
         $params = join(" TEXT, ", $columns)." TEXT";
         if ($ids[0]['tables_ids'] == ""){
-            $table_name = $_COOKIE['log']."Table0";
+            $table_name = $_COOKIE['log']."list0";
             $sql = "UPDATE `users` SET `tables_ids` = '0 ' WHERE `login` = '".$_COOKIE['log']."';";
             mysqli_query($conn,$sql);
             $sql = "CREATE TABLE ".$table_name." (id INT PRIMARY KEY AUTO_INCREMENT, "."$params".");";
@@ -31,7 +31,7 @@ function to_SQL($table, $conn) {
         } else {
             $tables_ids = explode(" ", $ids[0]['tables_ids']);
             $last = intval($tables_ids[count($tables_ids) - 2]) + 1;
-            $table_name = $_COOKIE['log']."Table".$last;
+            $table_name = $_COOKIE['log']."list".$last;
             $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids'].$last." ' WHERE `login` = '".$_COOKIE['log']."';";
             mysqli_query($conn,$sql);
             $sql = "CREATE TABLE ".$table_name." (id INT PRIMARY KEY AUTO_INCREMENT, "."$params".");";

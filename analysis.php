@@ -1,3 +1,10 @@
+<?php
+    include "conn.php";
+    session_start();
+    if (!isset($_COOKIE['log'])) {
+        header('Location:enter.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

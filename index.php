@@ -58,14 +58,17 @@
                     $query = mysqli_query($conn, $sql);
                     $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
                     $tables_ids = explode(" ", $tables_ids);
+                    $i = 1;
                     foreach ($tables_ids as $key => $name) {
                         if ($name == "") {
                             continue;
                         }
+                        $nickname = explode($_COOKIE['log'], $name)[0]." лист №".$i;
+                        $i = $i + 1;
                         echo '
                         <form method ="POST" class="file_item">
                             <span class = "name">
-                                '.$name.'
+                                '.$nickname.'
                             </span>
                             <div>
                                 <a class="analysis" href = "visualize.php?name='.$name.'">

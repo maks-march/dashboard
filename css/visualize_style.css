@@ -1,0 +1,77 @@
+:root {
+    --main-background: #C9C9C9;
+    --main-red: #C82525;
+    --main-white: #f4f4f4;
+    --main-green: #6FCB68;
+    --border-gray: #ccc;
+    --secondary-gray: #E7E5E5;
+    --text: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--main-white);
+    text-align: center;
+    align-content: center;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    background-color: var(--main-white);
+}
+
+main {
+    margin-top: 5vh;
+    width: 90vw;
+    height: 90vh;
+    overflow-y: scroll;
+}
+
+.container {
+    display: grid;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+}
+
+.cell {
+    align-content: center;
+    max-height: fit-content;
+    text-align: center;
+    min-height: 100%;
+    border: 1px solid var(--text);
+}
+
+.title {
+    height: 4vh;
+}
+
+.title:first-child {
+    width: 3vw;    
+}

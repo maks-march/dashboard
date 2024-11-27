@@ -2,9 +2,7 @@
 
 function deleteList($filename) {
     include 'conn.php';
-    $user = expand('List', $filename)[0];
-    $id = expand('List', $filename)[1];
-    $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$user."'";
+    $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."'";
     $query = mysqli_query($conn, $sql);
     $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
     $tables_ids = explode(" ", $tables_ids);

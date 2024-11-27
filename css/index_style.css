@@ -247,6 +247,7 @@ main .files {
   height: 100%;
   border-radius: 30px;
   border: var(--main-red) solid 1px;
+  background-color: var(--main-white);
 }
 
 .file_item a:hover {
@@ -285,9 +286,7 @@ main .files {
   }
 }
 
-<<<<<<< Updated upstream
 /* оставить в конце */
-=======
 #add .navigation {
   display: flex;
   justify-content: flex-start;
@@ -307,9 +306,6 @@ main .files {
   transform: translateY(-2px);
 }
 
-
-
->>>>>>> Stashed changes
 .active_block {
   display: flex;
 }

@@ -10,25 +10,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style_register.css">
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style_register.css">
+    <title>JustImport</title>
 </head>
 <body>
     <header>
-
+        <h1>JustImport</h1>
     </header>
 
     <main>
         <div class="container">
             <h3>Регистриция</h3>
-                <form method="POST" class="form" data-form-title="Form Name">
-                    <input autocomplete="off" type="email" name="email" placeholder="Почта" class="form-control" value="" id="email-form5-2">
+                <form method="POST" data-form-title="Form Name">
                     <input autocomplete="off" type="text" name ="login" required value="" placeholder="Логин">
                     <input autocomplete="off" type="password" name="password" required placeholder="Пароль">
                     <input autocomplete="off" type="password" name="password2" required placeholder="Повторите пароль">
-                    <button>Далее</button>
-                    <div class="enter">
-                        <a href="enter.php">Уже зарегистрированы?</a>
+                    <div class="buttons">
+                        <button>Далее</button>
+                        <a href="enter.php" class="enter">Уже зарегистрированы?</a>
                     </div>
                 <?php
                 if (isset($_COOKIE['error']))
@@ -58,7 +57,6 @@
                         }
                         if ($flag == 1){
                             setcookie('log', $_POST['login'], time() + 3600);
-                            //header('Location:mail.php');
                             $sql = "INSERT INTO `users` (`login`, `password`,`tables_ids`) VALUES ('".$_POST['login']."','".$_POST['password']."','')";
                             mysqli_query($conn,$sql);
                             header('Location:index.php?no_start');
@@ -69,12 +67,6 @@
                 ?>
                 </form>
         </div>
-        <div class="navigation">
-            <a href = "index.php?no_start" class="add_files">
-                К файлам
-            </a> 
-        </div>
     </main>
-    
 </body>
 </html>

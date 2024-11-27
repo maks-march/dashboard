@@ -1,7 +1,6 @@
 <?php
     include "conn.php";
     session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -59,22 +58,18 @@
                     $query = mysqli_query($conn, $sql);
                     $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
                     $tables_ids = explode(" ", $tables_ids);
-                    $filename = $_COOKIE['log']."list";
-                    foreach ($tables_ids as $key => $id) {
-                        if ($id == "") {
+                    foreach ($tables_ids as $key => $name) {
+                        if ($name == "") {
                             continue;
                         }
-                        $name = $filename.$id;
                         echo '
                         <form method ="POST" class="file_item">
                             <span class = "name">
                                 '.$name.'
                             </span>
                             <div>
-                                <a href = "analysis.php?name='.$name.'">
-                                    <div class="analysis">
-                                        Анализ
-                                    </div>
+                                <a class="analysis" href = "visualize.php?name='.$name.'">
+                                    Анализ
                                 </a>
                                 <input type="text" name = "filename" value ="'.$name.'" style = "display:none">
                                 <button class="delete">
@@ -82,14 +77,13 @@
                                 </button>
                             </div>
                         </form>
+                        <script src="js/window_script.js"></script>
                         ';
                     }
 
                     function deleteList($filename) {
-                        include 'conn.php';
-                        $user = explode('list', $filename)[0];
-                        $id = explode('list', $filename)[1];
-                        $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$user."'";
+                        include "conn.php";
+                        $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."'";
                         $query = mysqli_query($conn, $sql);
                         $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
                         $tables_ids = explode(" ", $tables_ids);
@@ -97,7 +91,7 @@
                         $flag = FALSE;
                         foreach ($tables_ids as $key => $table_id) {
                             if ($table_id != "") {
-                                if ($table_id != $id) {
+                                if ($table_id != $filename) {
                                     $new_ids = $new_ids.$table_id." ";
                                 } else {
                                     $flag = TRUE;
@@ -105,7 +99,7 @@
                             }
                         }
                         if ($flag) {
-                            $sql = "UPDATE `users` SET `tables_ids` = '".$new_ids." ' WHERE `login` = '".$user."';";
+                            $sql = "UPDATE `users` SET `tables_ids` = '".$new_ids." ' WHERE `login` = '".$_COOKIE['log']."';";
                             mysqli_query($conn, $sql);
                             $sql = "DROP TABLE `".$filename."`";
                             mysqli_query($conn, $sql);
@@ -120,9 +114,6 @@
             </a>
         </div>
     </main>
-
-
     
-    <script src="js/index_script.js"></script>
 </body>
 </html>

@@ -63,7 +63,7 @@
                         if ($name == "") {
                             continue;
                         }
-                        $nickname = explode($_COOKIE['log'], $name)[0]." лист №".$i;
+                        $nickname = explode($_COOKIE['log'], $name)[0]." лист №".(explode('list', $name)[1]+1);
                         $i = $i + 1;
                         echo '
                         <form method ="POST" class="file_item">

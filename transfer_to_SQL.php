@@ -78,7 +78,13 @@ function to_SQL($table, $conn) {
         $highestColumn = $sheet->getHighestColumn();
         $columns = array_keys($sheet->getColumnDimensions());
         $params = join(" TEXT, ", $columns)." TEXT";
-
+        $rowData = $sheet->rangeToArray('A' . 2 . ':' . $highestColumn . 2,
+        "",
+        TRUE,
+        FALSE);
+        if ($rowData[0][0] == 'ФЕДЕРАЛЬНОЕ СТАТИСТИЧЕСКОЕ НАБЛЮДЕНИЕ') {
+            continue;
+        }
         $table_name = $name.$_COOKIE['log']."list".$i;
         $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
         mysqli_query($conn,$sql);

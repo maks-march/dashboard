@@ -69,6 +69,10 @@ main {
     background-color: var(--main-white);
 }
 
+.container input[type=checkbox]:checked + .cell{
+	background-color: var(--main-green);
+}
+
 input {
     display: none;
 }
@@ -88,9 +92,5 @@ button {
     font-size: 3vh;
     border-radius: 30px;
     color: var(--main-white);
-    background-color: var(--main-green);
-}
-
-.active {
     background-color: var(--main-green);
 }

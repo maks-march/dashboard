@@ -23,35 +23,53 @@
                 echo '<div class="container" style="grid-template-columns: 3vw repeat('.(count($cols)-1).', 1fr)">';
                 foreach ($cols as $key) {
                     echo '
+                        <input id = "0.'.$key.'" type = "checkbox" value = "0.'.$key.'/" name = "coords[]">
                         <label for = "0.'.$key.'" class ="title cell">
                         '.$key.'     
                         </label>
-                        <input id = "0.'.$key.'" type = "checkbox" value = "0.'.$key.'/" name = "coords[]">
                     ';
                 }
-                foreach ($table as $tkey => $row) {
+                for ($i=0; $i < count($table); $i++) {
                     $prev = "";
+                    $row = $table[$i];
                     foreach ($cols as $ckey => $cvalue) {
-                        if ($row[$cvalue] != "" || $cvalue == $cols[1] || is_numeric($prev)) {
-                            $value = $row[$cvalue];
-                            if (($value == "X" || $value == "") && $cvalue != $cols[1]) {
-                                $value = 0;
+                        $value = $row[$cvalue];
+                        if ($value == "X") {
+                            $value = 0;
+                        }
+                        if ($value == "del" || ($value == "" && $cvalue != 'A')) {
+                            continue;
+                        }
+                        $iter_ver = $i + 1;
+                        $grid_row = "";
+                        $ver_join = False;
+                        while (!is_numeric($prev) && $iter_ver < count($table) && $table[$iter_ver][$cvalue] == "") {
+                            $ver_join = True;
+                            $table[$iter_ver][$cvalue] = "del";
+                            $iter_ver = $iter_ver + 1;
+                        }
+                        if ($ver_join) {
+                            $grid_row = "grid-row: ".($i+2)."/".($iter_ver+2).";";
+                        }
+                        $iter_hor = $ckey + 1;
+                        $input_value = $i.'.'.$cols[$iter_hor-1]."/";
+                        while ($iter_hor < count($cols) && $cols[$ckey] != 'id' && $row[$cols[$iter_hor]] == "") {
+                            $input_value = $input_value.$i.'.'.$cols[$iter_hor]."/";
+                            if (is_numeric($prev)){
+                                $row[$cols[$iter_hor]] = "0";
+                            } else {
+                                $row[$cols[$iter_hor]] = "del";
+                                $iter_hor = $iter_hor + 1;
                             }
-                            $iter = $ckey + 1;
-                            $input_value = $tkey.'.'.$cols[$iter-1]."/";
-                            while (!is_numeric($value) && $ckey != 0 && $iter < count($cols) && $row[$cols[$iter]] == "") {
-                                $input_value = $input_value.$tkey.'.'.$cols[$iter]."/";
-                                $iter = $iter + 1;
-                            }
-                            echo '
-                                <label for = "'.($tkey+1).'.'.$cvalue.'"  class ="cell" style="grid-column: '.($ckey+1).' / '.($iter+1).';">
-                                '.$value.'     
-                                </label>
-                                <input id = "'.($tkey+1).'.'.$cvalue.'" type = "checkbox" value = "'.$input_value.'" name = "coords[]">
-                            ';
-                            if ($cvalue != $cols[0]) {
-                                $prev = $value;
-                            }
+                        }
+                        echo '
+                            <input id = "'.($i+1).'.'.$cvalue.'" class = "input" type = "checkbox" value = "'.$input_value.'" name = "coords[]">
+                            <label for = "'.($i+1).'.'.$cvalue.'"  class ="cell" style="grid-column: '.($ckey+1).' / '.($iter_hor+1).';'.$grid_row.'">
+                            '.$value.'     
+                            </label>
+                        ';
+                        if ($cvalue != 'id') {
+                            $prev = $value;
                         }
                     }
                 }

@@ -47,7 +47,7 @@ body {
 }
 
 main {
-    margin-top: 5vh;
+    margin-top: 3vh;
     width: 90vw;
     height: 90vh;
     overflow-y: scroll;
@@ -66,6 +66,11 @@ main {
     text-align: center;
     min-height: 100%;
     border: 1px solid var(--text);
+    background-color: var(--main-white);
+}
+
+input {
+    display: none;
 }
 
 .title {
@@ -74,4 +79,18 @@ main {
 
 .title:first-child {
     width: 3vw;    
+}
+
+button {
+    display: flex;
+    width: 16vw;
+    height: 4vh;
+    font-size: 3vh;
+    border-radius: 30px;
+    color: var(--main-white);
+    background-color: var(--main-green);
+}
+
+.active {
+    background-color: var(--main-green);
 }

@@ -77,7 +77,6 @@ function to_SQL($table, $conn) {
         $highestRow = $sheet->getHighestRow(); 
         $highestColumn = $sheet->getHighestColumn();
         $columns = array_keys($sheet->getColumnDimensions());
-
         $params = join(" TEXT, ", $columns)." TEXT";
 
         $table_name = $name.$_COOKIE['log']."list".$i;
@@ -92,12 +91,11 @@ function to_SQL($table, $conn) {
                 "",
                 TRUE,
                 FALSE);
-                $values = '"'.join('", "', $rowData[0]).'"';
                 $keys= '`'.join('`, `', $columns).'`';
+                $values = '"'.join('", "', array_slice($rowData[0], 0, count($columns))).'"';
                 $sql = 'INSERT INTO `'.$table_name.'` ('.$keys.') Values ('.$values.')';
                 mysqli_query($conn,$sql);
             } catch(Exception $e) {
-                $var = $e;
             }
         }
         $i = $i + 1;

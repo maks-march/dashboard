@@ -26,6 +26,11 @@
             </a>
         </div>
         <h2 id = 'title'>Статистика</h2>
+        <?php
+            if(isset($_POST['coords'])){
+                var_dump($_POST);
+            }
+        ?>
         <div class="visualization">
             <div class="graphs">
                 <div class="row">

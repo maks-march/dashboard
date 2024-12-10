@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/index_style.css">
 </head>
 <body>
-
+    <script src="js/index_script.js"></script>
     <?php 
         if (!isset($_COOKIE['log'])) {
             echo '    
@@ -34,6 +34,10 @@
                 </div>
             </div>
             ';
+        } else {
+            echo '
+                <script src="js/window_script.js"></script>
+            ';
         }
     ?>
 
@@ -45,39 +49,60 @@
         <div class="files">
             <div class="title">
                 <span class="name">Файлы</span>
-                <input type="text" placeholder="Поиск...">
             </div>
-            <div class="scroller">
-                <?php 
-                
+            <form method="POST" class="scroller">
+                <div class="file_item">
+                    <label for="filename">
+                        <input type="checkbox" onClick="toggle(this)">
+                        <span class = "name">
+                            Выбранные листы
+                        </span>
+                    </label>
+                    <div>
+                        <input id = "a" type = "submit" name= "action_type" class="analysis" value = "Анализ">
+                        <input id = "a" type = "submit" name= "action_type" class="delete" value = "Удалить">
+                    </div>
+                </div>
+                <?php
                     if (isset($_POST['filename']) && $_POST['filename'] != "") {
-                        deleteList($_POST['filename']);
-                        $_POST['filename'] = "";
+                        if ($_POST['action_type'] == "Удалить") {
+                            foreach ($_POST['filename'] as $key => $value) {
+                                deleteList($value);
+                            }
+                        } else {
+                            $filenames = join('~', $_POST['filename']);
+                            $_POST['filename'] = "";
+                            header("Location: visualize.php?filenames=".$filenames);
+                        }
                     }
                     $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."'";
                     $query = mysqli_query($conn, $sql);
                     $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
                     $tables_ids = explode(" ", $tables_ids);
+                    $i = 1;
                     foreach ($tables_ids as $key => $name) {
                         if ($name == "") {
                             continue;
                         }
+                        $nickname = explode($_COOKIE['log'], $name)[0]." лист №".(explode('list', $name)[1]+1);
+                        $i = $i + 1;
                         echo '
-                        <form method ="POST" class="file_item">
-                            <span class = "name">
-                                '.$name.'
-                            </span>
+                        <div class="file_item">
+                            <label for="filename">
+                                <input type="checkbox" name = "filename[]" value ="'.$name.'">
+                                <span class = "name">
+                                    '.$nickname.'
+                                </span>
+                            </label>
                             <div>
                                 <a class="analysis" href = "visualize.php?name='.$name.'">
                                     Анализ
                                 </a>
-                                <input type="text" name = "filename" value ="'.$name.'" style = "display:none">
-                                <button class="delete">
+                                <a class="delete"  href = "delete.php?filename='.$name.'">
                                     Удалить
-                                </button>
+                                </a>
                             </div>
-                        </form>
-                        <script src="js/window_script.js"></script>
+                        </div>
                         ';
                     }
 
@@ -106,7 +131,7 @@
                         }
                     }
                 ?>
-            </div>
+            </form>
         </div>
         <div class="navigation">
             <a href = "add.php" class="add_files">
@@ -114,6 +139,5 @@
             </a>
         </div>
     </main>
-    
 </body>
 </html>

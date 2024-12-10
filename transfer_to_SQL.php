@@ -90,21 +90,42 @@ function to_SQL($table, $conn) {
         mysqli_query($conn,$sql);
         $sql = "CREATE TABLE ".$table_name." (id INT PRIMARY KEY AUTO_INCREMENT, "."$params".");";
         mysqli_query($conn,$sql);
-        
+        $drop_sql = "";
         for ($row = 1; $row <= $highestRow; $row++){
             try {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
                 "",
                 TRUE,
-                FALSE);
+                FALSE);     
+                $data = array_slice($rowData[0], 0, count($columns));
+                $k = 1;
+                $nums = 0;
+                foreach ($data as $key => $value) {
+                    if ($value == $k) {
+                        $nums = $nums + 1;
+                    }
+                    $k = $k + 1;
+                }
+                $drop = "DROP `".join("`, DROP `", array_slice($columns, $nums, count($columns)))."`";
+                if ($nums/count($data) > 0.7 && $nums != count($data)) {
+                    $drop_sql = 'ALTER TABLE `'.$table_name.'` '.$drop;
+                }
+
                 $keys= '`'.join('`, `', $columns).'`';
-                $values = '"'.join('", "', array_slice($rowData[0], 0, count($columns))).'"';
+                $values = '\''.join('\', \'', $data).'\'';
                 $sql = 'INSERT INTO `'.$table_name.'` ('.$keys.') Values ('.$values.')';
+                $sql = str_replace("\n", " ", $sql);
                 mysqli_query($conn,$sql);
+                
             } catch(Exception $e) {
+
             }
         }
         $i = $i + 1;
+        if ($drop_sql != "") {
+            echo $drop_sql;
+            mysqli_query($conn,$drop_sql);
+        }
     }
     unlink('files/'.$filename);
 }

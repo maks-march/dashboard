@@ -20,6 +20,7 @@
 
 h1, h2, h3, h4 {
     text-align: center;
+    color: var(--main-white);
 }
 
 button {
@@ -39,18 +40,34 @@ button:hover{
     cursor: pointer;
 }
 
+header {
+    background-color: var(--main-red);
+    width: 100vw;
+    height: 8vh;
+    display: flex;
+    justify-content: flex-end;
+    h1 {
+      font-size: 5vh;
+      margin-right: 5vw;
+    }
+}
+
 body {
     display: flex;
     flex-direction: column;
     width: 100vw;
     background-color: var(--main-white);
+    overflow-x: hidden;
 }
 
 main {
     margin-top: 3vh;
     width: 90vw;
-    height: 90vh;
+    max-height: 80vh;
+    min-height: 80vh;
     overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 1vh;
 }
 
 .container {
@@ -94,4 +111,24 @@ button {
     border-radius: 30px;
     color: var(--main-white);
     background-color: var(--main-green);
+}
+
+.navigation {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 2vh;
+    width: 80%;
+    .add_files {
+        width: 16vw;
+        height: 4vh;
+        font-size: 3vh;
+        border-radius: 30px;
+        background-color: var(--main-red);
+        margin-left: 3vw;
+    }
+}
+
+.navigation .add_files:hover {
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
 }

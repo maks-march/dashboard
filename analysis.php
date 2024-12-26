@@ -26,11 +26,23 @@
         <h2 id = 'title'>Статистика</h2>
         <?php
             if(isset($_POST['coords'])){
-                include "transfer_to_stats.php";
-                $stats = array_reverse(transfer_to_stats($_POST['coords'], $conn));
-                foreach ($stats as $key => $stat) {
-                    print_stat($stat);
+                echo '<h1 class="type">'.$_POST['type'].'</h1>';
+                include 'transfer_to_stats.php';
+                $tables = explode("~", $_POST['tables']);
+                $res = get_sorted($tables);
+                $by_city = $res['by_city'];
+                $by_year = $res['by_year'];
+                $by_part = $res['by_part'];
+                if (count($by_year) > 1) {
+                    $stats = get_stat_by_year($by_year, $_POST['coords'], $conn);
+                } else {
+                    if (count($by_city) > 1) {
+                        $stats = get_stat_by_city($by_city, $_POST['coords'], $conn);
+                    } else {
+                        $stats = get_stat_by_part($by_part, $_POST['coords'], $conn);
+                    }
                 }
+
             } else {
                 header('Location:index.php');
             }
@@ -49,21 +61,7 @@
                 }
             }
         ?>
-        <!-- <div class="visualization">
-            <div class="graphs">
-                <div class="row">
-                    <canvas id="chart_place"></canvas>
-                    <canvas id="chart_years"></canvas>
-                </div>
-                <div class="row">
-                    <canvas id="chart_payment"></canvas>
-                    <canvas id="chart_male"></canvas>
-                </div>
-            </div>
-        </div> -->
         
     </main>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/analysis_script.js"></script> -->
 </body>
 </html>

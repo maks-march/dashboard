@@ -70,6 +70,14 @@ main {
     margin-bottom: 1vh;
 }
 
+.choose_tables {
+    display: flex;
+    flex-direction: column;
+    * {
+        margin-bottom: 2vh;
+    }
+}
+
 .container {
     display: grid;
     width: 100%;
@@ -91,7 +99,7 @@ main {
 	background-color: var(--main-green);
 }
 
-input {
+.choose_values input {
     display: none;
 }
 
@@ -103,7 +111,7 @@ input {
     width: 3vw;    
 }
 
-button {
+button, .add_files {
     display: flex;
     width: 16vw;
     height: 4vh;
@@ -113,22 +121,19 @@ button {
     background-color: var(--main-green);
 }
 
+.add_files {
+    background-color: var(--main-red);
+    margin-top: 2vh;
+}
+
 .navigation {
     display: flex;
     justify-content: flex-start;
     margin-top: 2vh;
     width: 80%;
-    .add_files {
-        width: 16vw;
-        height: 4vh;
-        font-size: 3vh;
-        border-radius: 30px;
-        background-color: var(--main-red);
-        margin-left: 3vw;
-    }
 }
 
-.navigation .add_files:hover {
+button:hover, .add_files:hover {
     box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
     transform: translateY(-2px);
 }

@@ -26,7 +26,7 @@
         $i = 0;
         while (True) {
             try {
-                $sql = "DROP TABLE `".$filename."list".$i."`";
+                $sql = "DROP TABLE `".$filename.$_COOKIE['log']."list".$i."`";
                 mysqli_query($conn, $sql);
             } catch (Exception $e) {
                 break;

@@ -1,4 +1,5 @@
 <?php
+    include "conn.php";
     session_start();
     if (!isset($_COOKIE['log'])) {
         header('Location:index.php');
@@ -17,33 +18,123 @@
         <h1>JustImport</h1>
     </header>
     <main>
-    <form method="post">
-        <input type="text" name ="login" required value="" placeholder="Логин">
-        <input type="password" name="password" required placeholder="Пароль">
-        <input type="password" name="password2" required placeholder="Повторите пароль">
+    
+
+    <form method="post" class = "choose_tables">
+        <div class="navigation">
+            <a href="index.php?no_start" class = "add_files">
+                К файлам
+            </a>
+        </div>
+        <span>Город(а)</span>
+        <input class= "choose_tables_input" type="text" required name ="city" list="list-of-city" required placeholder="название, название 2">
+        <datalist id="list-of-city"> 
+        <?php 
+                $sql = 'SELECT `tables_ids` FROM `users` WHERE `login` = "'.$_COOKIE['log'].'"';
+                $query = mysqli_query($conn, $sql);
+                $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
+                $tables_ids = explode(" ", $tables_ids);
+                $cities = array();
+                $years = array();
+                foreach ($tables_ids as $key => $value) {
+                    if ($value == "") {
+                        continue;
+                    }
+                    $value = explode("_", $value);
+                    $cities[$key] = $value[0];
+                    $years[$key] = $value[1];
+                }
+                $cities = array_unique($cities);
+                foreach ($cities as $key => $city) {
+                    echo '
+                        <option value="'.$city.'">
+                    ';
+                }
+                $years = array_unique($years);
+            ?>
+        </datalist>
+        <span>Год(а)</span>
+        <input class= "choose_tables_input" type="text" required name ="year" list="list-of-years" required placeholder="2019, 2021">
+        <datalist id="list-of-years">
+            <?php 
+                foreach ($years as $key => $year) {
+                    echo '
+                        <option value="'.$year.'">
+                    ';
+                }
+            ?>
+        </datalist>
+        <span>Разделы</span>
+        <input class= "choose_tables_input" type="text" list = "list-of-parts" required name ="parts" placeholder="0, 1, 2, 3">
+        <datalist id="list-of-parts">
+            <option value="0">  
+            <option value="1">  
+            <option value="2">  
+            <option value="3">  
+            <option value="4">  
+            <option value="5">  
+            <option value="6"> 
+        </datalist>
+        <select name = "type" id="list-of-types">
+            <option value="pie">Круговая диаграмма</option>
+            <option value="bar">Стобчатая диаграмма</option>
+        </select>
+        <div class="navigation">
+            <button class="check" id = "ready">
+                Далее
+            </button>
+        </div>
     </form>
-    <form method="post" action = "analysis.php">
+    <form method="post" action = "analysis.php" class = "choose_values">
             <?php
-                if (isset($_GET['name'])) {
-                    write_table($_GET['name'], 0);
-                } else {
-                    if (isset($_GET['filenames'])) {
-                        $names = explode("~", $_GET['filenames']);
-                        foreach ($names as $key => $value) {
-                            write_table($value, $key);
+                if (isset($_POST['city'])) {
+                    $cities = explode(",", str_replace(" ", "", $_POST['city']));
+                    $years = explode(",", str_replace(" ", "", $_POST['year']));
+                    $parts = explode(",", str_replace(" ", "", $_POST['parts']));
+                    $type = $_POST['type'];
+                    $filenames = array();
+                    $i = 0;
+                    foreach ($cities as $key1 => $city) {
+                        foreach ($years as $key2 => $year) {
+                            foreach ($parts as $key3 => $part) {
+                                $filenames[$key1+$key2+$key3+$i] = $city."_".$year.$_COOKIE['log']."list".$part;
+                            }
+                            $i = $i + 10;
                         }
                     }
+                    foreach ($filenames as $key => $value) {
+                        if ($key > 10) {
+                            break;
+                        }
+                        write_table($value, $key);
+                    }
+                    $filenames = join("~", $filenames);
+                    echo '
+                        
+                        <div class="navigation" >
+                            <a href="index.php?no_start" class = "add_files">
+                                К файлам
+                            </a>
+                            <button class="check" id = "ready">
+                                Готово
+                            </button>
+                        </div>
+                        <input id = "filnames" type = "text" value = "'.$filenames.'" name = "tables">
+                        <input id = "type" type = "text" value = "'.$type.'" name = "type">
+                    ';
                 }
 
                 function write_table($name, $id){
                     include "conn.php";
                     $sql = "SELECT * FROM `".$name."`";
                     $table = mysqli_fetch_all(mysqli_query($conn, $sql), MYSQLI_ASSOC);
+                    $part = explode("list", $name);
+                    $part = $part[array_key_last($part)];
                     $cols = array_keys($table[0]);
                     echo '<div class="container" style="grid-template-columns: 3vw repeat('.(count($cols)-1).', 1fr)">';
                     foreach ($cols as $key) {
                         echo '
-                            <input id = "0.'.$key.'.'.$id.'" type = "checkbox" value = "'.$name.'/'.$key.'/" name = "coords[]">
+                            <input id = "0.'.$key.'.'.$id.'" type = "checkbox" value = "'.$part.'/'.$key.'/" name = "coords[]">
                             <label for = "0.'.$key.'.'.$id.'" class ="title cell">
                             '.$key.'     
                             </label>
@@ -90,7 +181,7 @@
                                 }
                             }
                             echo '
-                                <input id = "'.($i+1).'.'.$cvalue.'.'.$id.'" class = "input" type = "checkbox" value = "'.$name.'/'.$input_value.'" name = "coords[]">
+                                <input id = "'.($i+1).'.'.$cvalue.'.'.$id.'" class = "input" type = "checkbox" value = "'.$part.'/'.$input_value.'" name = "coords[]">
                                 <label for = "'.($i+1).'.'.$cvalue.'.'.$id.'"  class ="cell" style="grid-column: '.($ckey+1).' / '.($iter_hor+1).';'.$grid_row.'">
                                 '.$value.'     
                                 </label>
@@ -100,19 +191,17 @@
                             }
                         }
                     }
-                    echo '</div>';
+                    echo '
+                    </div>
+                    ';
                 }
             ?>
-        <div class="navigation">
-            <button class="check" id = "ready">
-                Готово
-            </button>
-            <a href="index.php?no_start" class = "add_files">
-                К файлам
-            </a>
-        </div>
     </form>
     </main>
-    <script src="js/visualize_script.js"></script>
+    <?php
+        echo '
+            <script src="js/visualize_script.js"></script>
+        ';
+    ?>
 </body>
 </html>

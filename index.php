@@ -68,7 +68,7 @@
                             deleteList($value);
                         }
                     }
-                    $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."'";
+                    $sql = 'SELECT `tables_ids` FROM `users` WHERE `login` = "'.$_COOKIE['log'].'"';
                     $query = mysqli_query($conn, $sql);
                     $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
                     $tables_ids = explode(" ", $tables_ids);
@@ -118,7 +118,7 @@
                             $i = 0;
                             while (True) {
                                 try {
-                                    $sql = "DROP TABLE `".$filename."list".$i."`";
+                                    $sql = "DROP TABLE `".$filename.$_COOKIE['log']."list".$i."`";
                                     mysqli_query($conn, $sql);
                                 } catch (Exception $e) {
                                     break;

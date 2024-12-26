@@ -73,7 +73,7 @@ function to_SQL($table, $conn) {
     
     $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."';";
     $ids = mysqli_fetch_all(mysqli_query($conn,$sql), MYSQLI_ASSOC);   
-    $table_name = $name.$_COOKIE['log'];
+    $table_name = $name;
     $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
     mysqli_query($conn,$sql);
 
@@ -127,7 +127,6 @@ function to_SQL($table, $conn) {
             }
         }
         if ($drop_sql != "") {
-            echo $drop_sql;
             mysqli_query($conn,$drop_sql);
         }
     }

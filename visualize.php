@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="css/visualize_style.css">
 </head>
 <body>
+    <header>
+        <h1>JustImport</h1>
+    </header>
     <form method="post" action = "analysis.php">
         <main>
             <?php
@@ -34,7 +37,7 @@
                     echo '<div class="container" style="grid-template-columns: 3vw repeat('.(count($cols)-1).', 1fr)">';
                     foreach ($cols as $key) {
                         echo '
-                            <input id = "0.'.$key.'.'.$id.'" type = "checkbox" value = "0.'.$key.'/" name = "coords[]">
+                            <input id = "0.'.$key.'.'.$id.'" type = "checkbox" value = "'.$name.'/'.$key.'/" name = "coords[]">
                             <label for = "0.'.$key.'.'.$id.'" class ="title cell">
                             '.$key.'     
                             </label>
@@ -70,9 +73,9 @@
                                 $grid_row = "grid-row: ".($i+2)."/".($iter_ver+2).";";
                             }
                             $iter_hor = $ckey + 1;
-                            $input_value = $i.'.'.$cols[$iter_hor-1]."/";
+                            $input_value = $cols[$iter_hor-1]."/";
                             while ($iter_hor < count($cols) && $cols[$ckey] != 'id' && $row[$cols[$iter_hor]] == "") {
-                                $input_value = $input_value.$i.'.'.$cols[$iter_hor]."/";
+                                $input_value = $input_value.$cols[$iter_hor]."/";
                                 if (is_numeric($prev)){
                                     $row[$cols[$iter_hor]] = "0";
                                 } else {
@@ -81,7 +84,7 @@
                                 }
                             }
                             echo '
-                                <input id = "'.($i+1).'.'.$cvalue.'.'.$id.'" class = "input" type = "checkbox" value = "'.$input_value.'" name = "coords[]">
+                                <input id = "'.($i+1).'.'.$cvalue.'.'.$id.'" class = "input" type = "checkbox" value = "'.$name.'/'.$input_value.'" name = "coords[]">
                                 <label for = "'.($i+1).'.'.$cvalue.'.'.$id.'"  class ="cell" style="grid-column: '.($ckey+1).' / '.($iter_hor+1).';'.$grid_row.'">
                                 '.$value.'     
                                 </label>
@@ -95,9 +98,14 @@
                 }
             ?>
         </main>
-        <button class="check" id = "ready">
-            Готово
-        </button>
+        <div class="navigation">
+            <button class="check" id = "ready">
+                Готово
+            </button>
+            <a href="index.php?no_start" class = "add_files">
+                К файлам
+            </a>
+        </div>
     </form>
     <script src="js/visualize_script.js"></script>
 </body>

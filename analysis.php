@@ -19,19 +19,37 @@
     </header>
     <main id="graphs">
         <div class="navigation">
-            <a href="index.php?no_start">
-                <button onclick = "moveToFiles()" class="add_files">
+            <a href="index.php?no_start" class = "add_files">
                     К файлам
-                </button>
             </a>
         </div>
         <h2 id = 'title'>Статистика</h2>
         <?php
             if(isset($_POST['coords'])){
-                var_dump($_POST);
+                include "transfer_to_stats.php";
+                $stats = array_reverse(transfer_to_stats($_POST['coords'], $conn));
+                foreach ($stats as $key => $stat) {
+                    print_stat($stat);
+                }
+            } else {
+                header('Location:index.php');
             }
         ?>
-        <div class="visualization">
+        <?php
+            function print_stat($stat) {
+                $keys = array_keys($stat['headers']);
+                echo '<h3>'.$stat['title'].'</h3>';
+                foreach ($keys as $i => $key) {
+                    echo '
+                    <ul>
+                        <li class = "header">'.$stat['headers'][$key].'</li>
+                        <li class = "value">'.$stat['stats'][$key].'</li>
+                    </ul>
+                    ';
+                }
+            }
+        ?>
+        <!-- <div class="visualization">
             <div class="graphs">
                 <div class="row">
                     <canvas id="chart_place"></canvas>
@@ -42,10 +60,10 @@
                     <canvas id="chart_male"></canvas>
                 </div>
             </div>
-        </div>
+        </div> -->
         
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/analysis_script.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/analysis_script.js"></script> -->
 </body>
 </html>

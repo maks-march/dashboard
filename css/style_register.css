@@ -1,0 +1,206 @@
+:root {
+    --main-red: #C82525;
+    --main-white: #f4f4f4;
+    --border-gray: #ccc;
+    --secondary-gray: #E7E5E5;
+    --text: #000;
+    --input_text: #C9C9C9;
+    --white_text: #FFFFFF;
+    --green_button: #6FCB68;
+}
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: var(--main-white);
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--main-white);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--main-white);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--main-red); 
+    width: 12px;
+}
+
+header {
+    background-color: var(--main-red);
+    width: 100vw;
+    height: 8vh;
+    display: flex;
+    justify-content: flex-end;
+    h1 {
+        font-size: 5vh;
+        margin-right: 5vw;
+    }
+}
+
+div.container_register {
+    border-radius: 5vh;
+    margin-top: 15vh;
+    background-color:  var(--secondary-gray);
+    width: 70vh;
+    height: 55vh;
+    h3 {
+        color: var(--text);
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        padding-top: 0.5rem;
+    }
+}
+
+div.container_enter {
+    border-radius: 5vh;
+    margin-top: 24vh;
+    background-color:  var(--secondary-gray);
+    width: 70vh;
+    height: 40vh;
+    h3 {
+        color: var(--text);
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        padding-top: 0.5rem;
+    }
+}
+
+div.container_cabinet {
+    border-radius: 5vh;
+    margin-top: 22vh;
+    background-color:  var(--secondary-gray);
+    width: 70vh;
+    height: 50vh;
+    h3 {
+        color: var(--text);
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        padding-top: 0.5rem;
+    }
+}
+
+.form_register {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50vh;
+    height: 42.5vh;
+    input {
+        width: 46vh;
+        height: 6.5vh;
+        border-radius: 2rem;
+        font-size: 1.6rem;
+        color: var(--text);
+        padding-left: 1.5vh;
+    }
+
+    input::placeholder {
+        color: var(--input_text);
+        font-size: 1.4rem;
+    }
+}
+
+.form_enter {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50vh;
+    height: 27vh;
+    input {
+        width: 46vh;
+        height: 6.5vh;
+        border-radius: 2rem;
+        font-size: 1.6rem;
+        color: var(--text);
+        padding-left: 1.5vh;
+    }
+
+    input::placeholder {
+        color: var(--input_text);
+        font-size: 1.4rem;
+    }
+}
+
+.form_cabinet {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50vh;
+    height: 37vh;
+    input {
+        width: 46vh;
+        height: 6.5vh;
+        border-radius: 2rem;
+        font-size: 1.6rem;
+        color: var(--text);
+        padding-left: 1.5vh;
+    }
+
+    input::placeholder {
+        color: var(--input_text);
+        font-size: 1.4rem;
+    }
+}
+
+
+.myButtons {
+    width: 57vh;
+    display: flex;
+    justify-content: space-between;
+    button {
+        width: 20vh;
+        height: 6.5vh;
+        font-size: 1.6rem;
+        color: var(--white_text);
+        background-color: var(--green_button);
+        border-radius: 1.8rem;
+    }
+
+    a.enter {
+        width: 25.5vh;
+        height: 6.5vh;
+        color: var(--white_text);
+        font-size: 1.4rem;
+        background-color: var(--main-red);
+        border-radius: 1.8rem;
+        display: flex;
+    }
+}

@@ -1,24 +1,8 @@
-// Функция для отображения данных по городу
-// Пример построения графика с использованием Chart.js
-const chart_place = document.getElementById('chart_place').getContext('2d');
-const chart_years = document.getElementById('chart_years').getContext('2d');
-const chart_payment = document.getElementById('chart_payment').getContext('2d');
-const chart_male = document.getElementById('chart_male').getContext('2d');
-
-
-let name = decodeURI(location.search.split('name=')[1].split(';')[0]);
+// Хранилище существующих графиков
+const activeCharts = {};
 
 const title = document.getElementById('title');
 title.innerText = title.innerText + ' '+ name
-
-
-
-writeChart(chart_place, 
-    ["дошкольные","общеобразовательные","проф образования","высшего образования","доп образования детей"],
-     [48178, 90418,17049,38193,52297], '#0000AA', undefined)
-writeChart(chart_years, ['3-15 лет', '16-18 лет', '19-29 лет', '30-54 лет', '54-79 лет', '80+ лет'], [209, 30, 154, 183, 39, 1], undefined, 'тысяч человек')
-writeChart(chart_payment, ['Платно', 'Бесплатно'], [174000, 618000-174000], ['#00AA00', '#AA0000'], undefined)
-writeChart(chart_male, ['Мужчины', 'Женщины'], [618000-253000, 253000], ['#36A2EB', '#FF6384'], undefined)
 
 function writeChart(ctx, list, _data, color, about ,type) {
     if (about == undefined) {
@@ -26,6 +10,10 @@ function writeChart(ctx, list, _data, color, about ,type) {
     }
     if (type == undefined) {
         type = 'bar'
+    }
+     // Уничтожаем старый график, если он существует
+    if (activeCharts[ctx.canvas.id]) {
+        activeCharts[ctx.canvas.id].destroy();
     }
     const chart = new Chart(ctx, {
         type: type,
@@ -45,8 +33,41 @@ function writeChart(ctx, list, _data, color, about ,type) {
             }
         }
     });
+    // Сохраняем ссылку на график
+    activeCharts[ctx.canvas.id] = chart;
 }
 
 function writeLineChart(ctx) {
     const chart = new Chart
 }
+    
+function processHiddenData() {
+    const chartDataBlocks = document.querySelectorAll('#hidden-data .chart-data');
+    let canvasIndex = 0;
+
+    chartDataBlocks.forEach((block) => {
+        const type = block.querySelector('.type').textContent.trim();
+        const headers = Array.from(block.querySelectorAll('ul .header')).map(el => el.textContent.trim());
+        const values = Array.from(block.querySelectorAll('ul .value')).map(el => parseInt(el.textContent.trim()));
+        
+        const canvasId = `chart_${canvasIndex}`;
+        let canvas = document.getElementById(canvasId);
+
+        if (!canvas) {
+            // Создаем новый canvas, если он отсутствует
+            const newCanvas = document.createElement('canvas');
+            newCanvas.id = canvasId;
+            document.querySelector('.visualization .graphs').appendChild(newCanvas);
+            canvas = newCanvas;
+        }
+
+        const ctx = canvas.getContext('2d');
+        writeChart(ctx, headers, values, undefined, 'Заголовок', type);
+        canvasIndex++;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    processHiddenData();
+});
+

@@ -125,3 +125,7 @@ canvas {
   max-width: 45%;
   max-height: 45vh;
 }
+
+#hidden-data {
+  display: none; 
+}

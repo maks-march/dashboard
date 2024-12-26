@@ -55,24 +55,17 @@
                     <label for="filename">
                         <input type="checkbox" onClick="toggle(this)">
                         <span class = "name">
-                            Выбранные листы
+                            Выбранные файлы
                         </span>
                     </label>
                     <div>
-                        <input id = "a" type = "submit" name= "action_type" class="analysis" value = "Анализ">
                         <input id = "a" type = "submit" name= "action_type" class="delete" value = "Удалить">
                     </div>
                 </div>
                 <?php
                     if (isset($_POST['filename']) && $_POST['filename'] != "") {
-                        if ($_POST['action_type'] == "Удалить") {
-                            foreach ($_POST['filename'] as $key => $value) {
-                                deleteList($value);
-                            }
-                        } else {
-                            $filenames = join('~', $_POST['filename']);
-                            $_POST['filename'] = "";
-                            header("Location: visualize.php?filenames=".$filenames);
+                        foreach ($_POST['filename'] as $key => $value) {
+                            deleteList($value);
                         }
                     }
                     $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."'";
@@ -84,20 +77,16 @@
                         if ($name == "") {
                             continue;
                         }
-                        $nickname = explode($_COOKIE['log'], $name)[0]." лист №".(explode('list', $name)[1]+1);
                         $i = $i + 1;
                         echo '
                         <div class="file_item">
                             <label for="filename">
                                 <input type="checkbox" name = "filename[]" value ="'.$name.'">
                                 <span class = "name">
-                                    '.$nickname.'
+                                    '.$name.'
                                 </span>
                             </label>
                             <div>
-                                <a class="analysis" href = "visualize.php?name='.$name.'">
-                                    Анализ
-                                </a>
                                 <a class="delete"  href = "delete.php?filename='.$name.'">
                                     Удалить
                                 </a>
@@ -126,8 +115,17 @@
                         if ($flag) {
                             $sql = "UPDATE `users` SET `tables_ids` = '".$new_ids." ' WHERE `login` = '".$_COOKIE['log']."';";
                             mysqli_query($conn, $sql);
-                            $sql = "DROP TABLE `".$filename."`";
-                            mysqli_query($conn, $sql);
+                            $i = 0;
+                            while (True) {
+                                try {
+                                    $sql = "DROP TABLE `".$filename."list".$i."`";
+                                    mysqli_query($conn, $sql);
+                                } catch (Exception $e) {
+                                    break;
+                                }
+                                $i = $i + 1;
+                            }
+
                         }
                     }
                 ?>
@@ -136,6 +134,9 @@
         <div class="navigation">
             <a href = "add.php" class="add_files">
                 Добавить файлы
+            </a>
+            <a href = "visualize.php" class="visualize_files">
+                Создать графики
             </a>
         </div>
     </main>

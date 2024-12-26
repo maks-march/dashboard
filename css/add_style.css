@@ -181,3 +181,7 @@ main {
         background-color: var(--main-red);
     }
 }
+
+.error {
+    color: #000;
+}

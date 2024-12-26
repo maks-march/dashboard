@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_COOKIE['log']) || (!isset($_GET['name']) && !isset($_GET['filenames']))) {
+    if (!isset($_COOKIE['log'])) {
         header('Location:index.php');
     }
 ?>
@@ -16,18 +16,24 @@
     <header>
         <h1>JustImport</h1>
     </header>
+    <main>
+    <form method="post">
+        <input type="text" name ="login" required value="" placeholder="Логин">
+        <input type="password" name="password" required placeholder="Пароль">
+        <input type="password" name="password2" required placeholder="Повторите пароль">
+    </form>
     <form method="post" action = "analysis.php">
-        <main>
             <?php
                 if (isset($_GET['name'])) {
                     write_table($_GET['name'], 0);
                 } else {
-                    $names = explode("~", $_GET['filenames']);
-                    foreach ($names as $key => $value) {
-                        write_table($value, $key);
+                    if (isset($_GET['filenames'])) {
+                        $names = explode("~", $_GET['filenames']);
+                        foreach ($names as $key => $value) {
+                            write_table($value, $key);
+                        }
                     }
                 }
-
 
                 function write_table($name, $id){
                     include "conn.php";
@@ -97,7 +103,6 @@
                     echo '</div>';
                 }
             ?>
-        </main>
         <div class="navigation">
             <button class="check" id = "ready">
                 Готово
@@ -107,6 +112,7 @@
             </a>
         </div>
     </form>
+    </main>
     <script src="js/visualize_script.js"></script>
 </body>
 </html>

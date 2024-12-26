@@ -70,9 +70,14 @@ function to_SQL($table, $conn) {
 
     $sheets = $objPHPExcel -> getAllSheets();
     $i = 0;
-    foreach ($sheets as $key => $sheet) {
-        $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."';";
-        $ids = mysqli_fetch_all(mysqli_query($conn,$sql), MYSQLI_ASSOC);    
+    
+    $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."';";
+    $ids = mysqli_fetch_all(mysqli_query($conn,$sql), MYSQLI_ASSOC);   
+    $table_name = $name.$_COOKIE['log'];
+    $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
+    mysqli_query($conn,$sql);
+
+    foreach ($sheets as $key => $sheet) { 
 
         $highestRow = $sheet->getHighestRow(); 
         $highestColumn = $sheet->getHighestColumn();
@@ -85,9 +90,9 @@ function to_SQL($table, $conn) {
         if ($rowData[0][0] == 'ФЕДЕРАЛЬНОЕ СТАТИСТИЧЕСКОЕ НАБЛЮДЕНИЕ') {
             continue;
         }
+
         $table_name = $name.$_COOKIE['log']."list".$i;
-        $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
-        mysqli_query($conn,$sql);
+        $i = $i + 1;
         $sql = "CREATE TABLE ".$table_name." (id INT PRIMARY KEY AUTO_INCREMENT, "."$params".");";
         mysqli_query($conn,$sql);
         $drop_sql = "";
@@ -121,7 +126,6 @@ function to_SQL($table, $conn) {
 
             }
         }
-        $i = $i + 1;
         if ($drop_sql != "") {
             echo $drop_sql;
             mysqli_query($conn,$drop_sql);

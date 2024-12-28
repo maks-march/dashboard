@@ -34,12 +34,12 @@
                 $by_year = $res['by_year'];
                 $by_part = $res['by_part'];
                 if (count($by_year) > 1) {
-                    $stats = get_stat_by_year($by_year, $_POST['coords'], $conn);
+                    get_stat_by_year($by_year, $_POST['coords'], $conn);
                 } else {
                     if (count($by_city) > 1) {
-                        $stats = get_stat_by_city($by_city, $_POST['coords'], $conn);
+                        get_stat_by_city($by_city, $_POST['coords'], $conn);
                     } else {
-                        $stats = get_stat_by_part($by_part, $_POST['coords'], $conn);
+                        get_stat_by_part($by_part, $_POST['coords'], $conn);
                     }
                 }
 

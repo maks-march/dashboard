@@ -137,6 +137,9 @@
             </a>
             <a href = "visualize.php" class="visualize_files">
                 Создать графики
+            </a>            
+            <a href = "logout.php" class="logout">
+                Выйти
             </a>
         </div>
     </main>

@@ -78,6 +78,7 @@
         <select name = "type" id="list-of-types">
             <option value="pie">Круговая диаграмма</option>
             <option value="bar">Стобчатая диаграмма</option>
+            <option value="gistogramm">Линейная диаграмма</option>
         </select>
         <div class="navigation">
             <button class="check" id = "ready">
@@ -102,26 +103,37 @@
                             $i = $i + 10;
                         }
                     }
+                    $flag = true;
                     foreach ($filenames as $key => $value) {
                         if ($key > 10) {
                             break;
                         }
-                        write_table($value, $key);
+                        try {
+                            
+                            $sql = "SELECT * FROM `".$value."`";
+                            $table = mysqli_fetch_all(mysqli_query($conn, $sql), MYSQLI_ASSOC);
+                            write_table($value, $key);
+                        } catch (Exception $e){
+                            echo 'Ошибка некорректные данные!';
+                            $flag = false;
+                        }
                     }
                     $filenames = join("~", $filenames);
-                    echo '
-                        
-                        <div class="navigation" >
-                            <a href="index.php?no_start" class = "add_files">
-                                К файлам
-                            </a>
-                            <button class="check" id = "ready">
-                                Готово
-                            </button>
-                        </div>
-                        <input id = "filnames" type = "text" value = "'.$filenames.'" name = "tables">
-                        <input id = "type" type = "text" value = "'.$type.'" name = "type">
-                    ';
+                    if ($flag) {
+                        echo '
+                            
+                            <div class="navigation" >
+                                <a href="index.php?no_start" class = "add_files">
+                                    К файлам
+                                </a>
+                                <button class="check" id = "ready">
+                                    Готово
+                                </button>
+                            </div>
+                            <input id = "filnames" type = "text" value = "'.$filenames.'" name = "tables">
+                            <input id = "type" type = "text" value = "'.$type.'" name = "type">
+                        ';
+                    }
                 }
 
                 function write_table($name, $id){

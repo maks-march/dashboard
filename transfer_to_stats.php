@@ -73,7 +73,8 @@ function get_stat_by_year($lists, $coords, $conn) {
         echo '<h2>Сравнение в разделе № '.$part.'</h2>';
         foreach ($values[$headers[0]] as $s_key => $stat) {
             foreach ($stat['headers'] as $h_key => $value) {
-                echo '<h3>Параметр: '.$values[$headers[0]][$s_key]['headers'][$h_key].'</h3>';
+                echo '<div class = "chart-data">';
+                echo '<h3 class = "title">'.$values[$headers[0]][$s_key]['headers'][$h_key].'</h3>';
                 echo '<ul class = "'.$h_key.'">';
                 foreach ($headers as $key => $header) {
                     echo '<li class="header">'.$header.'</li>';
@@ -87,6 +88,7 @@ function get_stat_by_year($lists, $coords, $conn) {
                 echo '
                 </ul>
                 ';
+                echo '</div>';
             }
         }
     }
@@ -100,7 +102,8 @@ function get_stat_by_city($lists, $coords, $conn) {
         echo '<h2>Сравнение в разделе № '.$part.'</h2>';
         foreach ($values[$headers[0]] as $s_key => $stat) {
             foreach ($stat['headers'] as $h_key => $value) {
-                echo '<h3>'.$values[$headers[0]][$s_key]['headers'][$h_key].'</h3>';
+                echo '<div class = "chart-data">';
+                echo '<h3 class = "title">'.$values[$headers[0]][$s_key]['headers'][$h_key].'</h3>';
                 echo '<ul class = "'.$h_key.'">';
                 foreach ($headers as $key => $header) {
                     echo '<li class="header">'.$header.'</li>';
@@ -114,6 +117,7 @@ function get_stat_by_city($lists, $coords, $conn) {
                 echo '
                 </ul>
                 ';
+                echo '</div>';
             }
         }
     }
@@ -125,15 +129,13 @@ function get_stat_by_part($lists, $coords, $conn) {
     $headers = array_keys($lists);
     $flag_compare_parts = true;
     foreach ($coords as $key => $columns) {
-        if (count($columns) == 1 ) {
+        if (count($columns) != 1 ) {
             $flag_compare_parts = false;
             break;
         }
     }
     if ($flag_compare_parts) {
-
-    } else {
-        echo '<h2>Сравнение параметров</h2>';
+        echo '<div class = "chart-data">';
         foreach ($lists as $part => $title) {
             $title = $title[0];
             $coord = $coords[$part];
@@ -156,7 +158,32 @@ function get_stat_by_part($lists, $coords, $conn) {
         echo '
         </ul>
         ';
-
+        echo '</div>';
+    } else {
+        echo '<div class = "chart-data">';
+        foreach ($lists as $part => $title) {
+            $title = $title[0];
+            $coord = $coords[$part];
+            array_push($stats, transfer_to_stats($title, $coord, $conn));
+        }
+        echo '<ul class = "0">';
+        foreach ($stats as $part => $values) {
+            foreach ($values['headers'] as $key => $value) {
+                echo '<li class="header">'.$value." раздел ".$part.'</li>';
+            }
+        }
+        echo '
+        </ul><ul class = "0">
+        ';
+        foreach ($stats as $part => $values) {
+            foreach ($values['stats'] as $key => $value) {
+                echo '<li class="value">'.$value.'</li>';
+            }
+        }
+        echo '
+        </ul>
+        ';
+        echo '</div>';
     }
 
 }

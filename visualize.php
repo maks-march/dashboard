@@ -1,8 +1,49 @@
 <?php
     include "conn.php";
     session_start();
+    if ((!isset($_POST['filename']) || $_POST['action_type'] == 'Удалить') && !isset($_POST['city'])) {
+        foreach ($_POST['filename'] as $key => $value) {
+            deleteList($value);
+        }
+        header('Location:index.php');
+    }
     if (!isset($_COOKIE['log'])) {
         header('Location:index.php');
+    }
+
+    
+    function deleteList($filename) {
+        include "conn.php";
+        $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."'";
+        $query = mysqli_query($conn, $sql);
+        $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
+        $tables_ids = explode(" ", $tables_ids);
+        $new_ids = "";
+        $flag = FALSE;
+        foreach ($tables_ids as $key => $table_id) {
+            if ($table_id != "") {
+                if ($table_id != $filename) {
+                    $new_ids = $new_ids.$table_id." ";
+                } else {
+                    $flag = TRUE;
+                }
+            }
+        }
+        if ($flag) {
+            $sql = "UPDATE `users` SET `tables_ids` = '".$new_ids." ' WHERE `login` = '".$_COOKIE['log']."';";
+            mysqli_query($conn, $sql);
+            $i = 0;
+            while (True) {
+                try {
+                    $sql = "DROP TABLE `".$filename.$_COOKIE['log']."list".$i."`";
+                    mysqli_query($conn, $sql);
+                } catch (Exception $e) {
+                    break;
+                }
+                $i = $i + 1;
+            }
+
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -30,19 +71,12 @@
         <input class= "choose_tables_input" type="text" required name ="city" list="list-of-city" required placeholder="название, название 2">
         <datalist id="list-of-city"> 
         <?php 
-                $sql = 'SELECT `tables_ids` FROM `users` WHERE `login` = "'.$_COOKIE['log'].'"';
-                $query = mysqli_query($conn, $sql);
-                $tables_ids = mysqli_fetch_all($query, MYSQLI_ASSOC)[0]['tables_ids'];
-                $tables_ids = explode(" ", $tables_ids);
                 $cities = array();
                 $years = array();
-                foreach ($tables_ids as $key => $value) {
-                    if ($value == "") {
-                        continue;
-                    }
-                    $value = explode("_", $value);
-                    $cities[$key] = $value[0];
-                    $years[$key] = $value[1];
+                foreach ($_POST['filename'] as $key => $value) {
+                    $value = explode('_', $value);
+                    $cities[$key] = join("_", array_slice($value, 0, count($value)-1));
+                    $years[$key] = $value[array_key_last($value)];
                 }
                 $cities = array_unique($cities);
                 foreach ($cities as $key => $city) {

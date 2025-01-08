@@ -49,7 +49,6 @@ margin и padding используй с уточнением -top -bottom -right
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  color: var(--main-white);
   align-items: center;
   justify-content: center;
 }
@@ -64,26 +63,16 @@ button {
   cursor: pointer;
 }
 
-a, #a {
+a {
   text-decoration: none;
   cursor: pointer;
-  color: var(--main-white);
+  color: var(--text);
   text-align: center;
   align-content: center;
-  font-size: large;
 }
 
 button:hover{
   cursor: pointer;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--main-white);
-  overflow: hidden;
 }
 
 .file_item .analysis:hover, .delete:hover, .navigation a:hover, .controls button:hover, .controls label:hover {
@@ -96,12 +85,19 @@ body {
   transition: all 2s ease-in-out;
 }
 
-
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--main-white);
+  overflow: hidden;
+}
 
 .start_window {
+  color: var(--main-white);
   display: flex;
   position: absolute;
-  z-index: 10;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
@@ -189,10 +185,8 @@ main .files {
   background-color: var(--secondary-gray);
   border-radius: 30px;
   overflow: hidden;
-  * {
-    color: var(--text)
-  }
   .title {
+    color: var(--text);
     width:100%;
     height: 6vh;
     text-align:left;
@@ -210,6 +204,7 @@ main .files {
 }
 
 .title input {
+  color: var(--text);
   height: 70%;
   width: 20%;
   padding-left: 12px;
@@ -227,39 +222,32 @@ main .files {
   justify-content: space-between;
   padding-left: 5vw;
   border-bottom: var(--border-gray) solid 1px;
+  a {
+    width: 40%;
+    height: 80%;
+  }
   div {
     display: flex;
     height: 100%;
     width: 30%;
     justify-content: space-between;
   }
-  label {
-    input {
-      margin-right: 1vw;
-    }
-  }
 }
 
-.scroller .file_item:nth-child(1) {
-  width: 75%;
-  height: 6vh;
-  position: fixed;
-  background-color: var(--secondary-gray);
-  div #a {
-    color:var(--text);
-  }
-}
-
-.scroller .file_item:nth-child(2) {
-  margin-top:6vh;
-}
-
-.analysis, .delete {
+.delete {
   width: 40%;
   height: 80%;
+  font-size: larger;
   border-radius: 30px;
   border: var(--main-red) solid 1px;
   background-color: var(--main-white);
+}
+
+.analysis {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  border: var(--main-red) solid 1px;
 }
 
 .file_item a:hover {
@@ -289,7 +277,11 @@ main .files {
   justify-content: flex-start;
   margin-top: 2vh;
   width: 75%;
-  a {
+  a, input {
+    color: var(--main-white);
+    outline: none;
+    border: 0;
+    display: block;
     width: 16vw;
     height: 6vh;
     font-size: 3vh;
@@ -298,22 +290,7 @@ main .files {
   }
 }
 
-/* оставить в конце */
-#add .navigation {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 2vh;
-  width: 75%;
-  button {
-    width: 12vw;
-    height: 5vh;
-    font-size: 3vh;
-    border-radius: 30px;
-    background-color: var(--main-red);
-  }
-}
-
-.navigation button:hover {
+.navigation input:hover, a:hover {
   box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
   transform: translateY(-2px);
 }

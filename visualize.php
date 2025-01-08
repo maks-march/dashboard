@@ -62,12 +62,7 @@
     
 
     <form method="post" class = "choose_tables">
-        <div class="navigation">
-            <a href="index.php?no_start" class = "add_files">
-                К файлам
-            </a>
-        </div>
-        <span>Город(а)</span>
+        <h2>Город(а)</h2>
         <input class= "choose_tables_input" type="text" required name ="city" list="list-of-city" required placeholder="название, название 2">
         <datalist id="list-of-city"> 
         <?php 
@@ -87,7 +82,7 @@
                 $years = array_unique($years);
             ?>
         </datalist>
-        <span>Год(а)</span>
+        <h2>Год(а)</h2>
         <input class= "choose_tables_input" type="text" required name ="year" list="list-of-years" required placeholder="2019, 2021">
         <datalist id="list-of-years">
             <?php 
@@ -98,7 +93,7 @@
                 }
             ?>
         </datalist>
-        <span>Разделы</span>
+        <h2>Раздел(ы)</h2>
         <input class= "choose_tables_input" type="text" list = "list-of-parts" required name ="parts" placeholder="0, 1, 2, 3">
         <datalist id="list-of-parts">
             <option value="0">  
@@ -115,6 +110,9 @@
             <option value="gistogramm">Линейная диаграмма</option>
         </select>
         <div class="navigation">
+            <a href="index.php?no_start" class = "add_files">
+                К файлам
+            </a>
             <button class="check" id = "ready">
                 Далее
             </button>

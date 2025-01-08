@@ -70,7 +70,6 @@ function get_stat_by_year($lists, $coords, $conn) {
     $headers = array_keys($lists);
     $stats = get_stats($coords, $lists, $headers, $conn);
     foreach ($stats as $part => $values) {
-        echo '<h2>Сравнение в разделе № '.$part.'</h2>';
         foreach ($values[$headers[0]] as $s_key => $stat) {
             foreach ($stat['headers'] as $h_key => $value) {
                 echo '<div class = "chart-data">';
@@ -99,7 +98,6 @@ function get_stat_by_city($lists, $coords, $conn) {
     $headers = array_keys($lists);
     $stats = get_stats($coords, $lists, $headers, $conn);
     foreach ($stats as $part => $values) {
-        echo '<h2>Сравнение в разделе № '.$part.'</h2>';
         foreach ($values[$headers[0]] as $s_key => $stat) {
             foreach ($stat['headers'] as $h_key => $value) {
                 echo '<div class = "chart-data">';

@@ -41,12 +41,15 @@
                 </div>
             </form>
         </div>
-        <?php            
-            if(isset($_FILES['uploadfile']) && !empty($_FILES['uploadfile']['name'])){
-                include "transfer_to_SQL.php";
-                transfer_to_SQL($_FILES['uploadfile'], $conn);
-            }
-        ?>
+        <div class="error">
+            <?php            
+                if(isset($_FILES['uploadfile']) && !empty($_FILES['uploadfile']['name'])){
+                    include "transfer_to_SQL.php";
+                    transfer_to_SQL($_FILES['uploadfile'], $conn);
+                }
+            ?>
+        </div>
+
         <div class="navigation">
             <a href = "index.php?no_start" class="add_files">
                 К файлам

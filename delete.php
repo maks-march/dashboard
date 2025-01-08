@@ -23,8 +23,17 @@
     if ($flag) {
         $sql = "UPDATE `users` SET `tables_ids` = '".$new_ids." ' WHERE `login` = '".$_COOKIE['log']."';";
         mysqli_query($conn, $sql);
-        $sql = "DROP TABLE `".$filename."`";
-        mysqli_query($conn, $sql);
+        $i = 0;
+        while (True) {
+            try {
+                $sql = "DROP TABLE `".$filename.$_COOKIE['log']."list".$i."`";
+                mysqli_query($conn, $sql);
+            } catch (Exception $e) {
+                break;
+            }
+            $i = $i + 1;
+        }
+
     }
     header('Location:index.php?no_start');
 ?>

@@ -65,17 +65,20 @@ function to_SQL($table, $conn) {
         $objReader = PHPExcel_IOFactory::createReader($inputFileType);
         $objPHPExcel = $objReader->load($inputFileName);
     } catch(Exception $e) {
-        die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+        die("Ошибка загрузки файла!");
     }
     $sheets = $objPHPExcel -> getAllSheets();
 
     $i = 0;
-    
-    $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."';";
-    $ids = mysqli_fetch_all(mysqli_query($conn,$sql), MYSQLI_ASSOC);   
-    $table_name = $name;
-    $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
-    mysqli_query($conn,$sql);
+    try {
+        $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."';";
+        $ids = mysqli_fetch_all(mysqli_query($conn,$sql), MYSQLI_ASSOC);   
+        $table_name = $name;
+        $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
+        mysqli_query($conn,$sql);
+    } catch(Exception $e) {
+        die("Ошибка!");
+    }
 
     foreach ($sheets as $key => $sheet) { 
         $sheet->getStyle('A1:AA1000')->getAlignment()->setWrapText(false);
@@ -123,7 +126,7 @@ function to_SQL($table, $conn) {
                 mysqli_query($conn,$sql);
                 
             } catch(Exception $e) {
-
+                die("Ошибка!");
             }
         }
         if ($drop_sql != "") {

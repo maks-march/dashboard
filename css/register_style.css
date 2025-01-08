@@ -32,6 +32,10 @@ a {
     text-decoration: none;
 }
 
+header {
+    color:var(--main-white);
+}
+
 body {
     display: flex;
     flex-direction: column;

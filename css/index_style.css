@@ -85,6 +85,10 @@ button:hover{
   transition: all 2s ease-in-out;
 }
 
+header {
+  color:var(--main-white);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -181,7 +185,7 @@ main {
 main .files {
   margin-top: 5vh;
   width: 75%;
-  height: 80%;
+  height: 90%;
   background-color: var(--secondary-gray);
   border-radius: 30px;
   overflow: hidden;
@@ -195,10 +199,11 @@ main .files {
     padding-left: 5vw;
     padding-right: 2vw;
     border-bottom: var(--text) solid 1px;
+    font-size: 1.5rem;
   }
   .scroller {
     width: 100%;
-    height: 92%;
+    height: 80%;
     overflow-y: scroll;
   }
 }
@@ -232,6 +237,18 @@ main .files {
     width: 30%;
     justify-content: space-between;
   }
+  input[type="checkbox"]{
+    accent-color: var(--main-green);
+    height: 30px;
+    width:30px;
+    border-radius: 30px;
+    margin-right: 2vw;
+  }
+
+  label {
+    display: flex;
+    font-size: 1.1rem;
+  }
 }
 
 .delete {
@@ -260,7 +277,7 @@ main .files {
 
 
 .scroller::-webkit-scrollbar {
-  width: 0px;
+  width: 5px;
 }
 
 .scroller::-webkit-scrollbar-track {
@@ -278,6 +295,7 @@ main .files {
   margin-top: 2vh;
   width: 75%;
   a, input {
+    margin-right: 5vw;
     color: var(--main-white);
     outline: none;
     border: 0;

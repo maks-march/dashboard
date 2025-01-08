@@ -67,8 +67,8 @@ function to_SQL($table, $conn) {
     } catch(Exception $e) {
         die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
     }
-
     $sheets = $objPHPExcel -> getAllSheets();
+
     $i = 0;
     
     $sql = "SELECT `tables_ids` FROM `users` WHERE `login` = '".$_COOKIE['log']."';";
@@ -78,7 +78,7 @@ function to_SQL($table, $conn) {
     mysqli_query($conn,$sql);
 
     foreach ($sheets as $key => $sheet) { 
-
+        $sheet->getStyle('A1:AA1000')->getAlignment()->setWrapText(false);
         $highestRow = $sheet->getHighestRow(); 
         $highestColumn = $sheet->getHighestColumn();
         $columns = array_keys($sheet->getColumnDimensions());

@@ -52,6 +52,10 @@ header {
     }
 }
 
+header {
+    color:var(--main-white);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -63,18 +67,40 @@ body {
 main {
     margin-top: 3vh;
     width: 90vw;
-    max-height: 80vh;
-    min-height: 80vh;
+    min-height: 65vh;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-bottom: 1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main::-webkit-scrollbar {
+    width: 0;
 }
 
 .choose_tables {
     display: flex;
     flex-direction: column;
-    * {
+    width: 100%;
+    input, select {
+        width: 46vh;
+        height: 6.5vh;
+        border-radius: 2rem;
+        font-size: 1.6rem;
+        color: var(--text);
+        margin-top: 2vh;
+        padding-left: 15px;
         margin-bottom: 2vh;
+    }
+
+    input::placeholder {
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        color: var(--text);
+        font-size: 2rem;
     }
 }
 
@@ -97,6 +123,11 @@ main {
 
 .container input[type=checkbox]:checked + .cell{
 	background-color: var(--main-green);
+}
+
+.choose_values {
+    display: flex;
+    flex-direction: column;
 }
 
 .choose_values input {
@@ -123,14 +154,13 @@ button, .add_files {
 
 .add_files {
     background-color: var(--main-red);
-    margin-top: 2vh;
+    margin-right: 2vw;
 }
 
 .navigation {
     display: flex;
     justify-content: flex-start;
     margin-top: 2vh;
-    width: 80%;
 }
 
 button:hover, .add_files:hover {

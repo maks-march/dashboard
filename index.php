@@ -46,11 +46,11 @@
         <h1>JustImport</h1>
     </header>
     <main id ="files">
-        <div class="files">
+        <form method="POST" action ="visualize.php" class = "files">
             <div class="title">
-                <span class="name">Файлы</span>
+                Файлы
             </div>
-            <form method="POST" action ="visualize.php" class="scroller">
+            <div class="scroller">
                 <div class="file_item">
                     <label for="filename">
                         <input type="checkbox" onClick="toggle(this)">
@@ -90,17 +90,17 @@
                         ';
                     }
                 ?>
-                <div class="navigation">
-                    <a href = "add.php" class="add_files">
-                        Добавить файлы
-                    </a>
-                    <input type = "submit" name= "action_type" class="visualize_files" value = "Создать графики">           
-                    <a href = "logout.php" class="logout">
-                        Выйти
-                    </a>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="navigation">
+                <a href = "add.php" class="add_files">
+                    Добавить файлы
+                </a>
+                <input type = "submit" name= "action_type" class="visualize_files" value = "Создать графики">           
+                <a href = "logout.php" class="logout">
+                    Выйти
+                </a>
+            </div>
+        </form>
     </main>
 </body>
 </html>

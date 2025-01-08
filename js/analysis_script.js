@@ -47,7 +47,7 @@ function processHiddenData() {
     let canvasIndex = 0;
     const type = document.querySelector('.type').innerText;
     chartDataBlocks.forEach((block) => {
-        const title = block.querySelector('.title');
+        let title = block.querySelector('.title');
         const headers = Array.from(block.querySelectorAll('ul .header')).map(el => el.textContent.trim());
         const values = Array.from(block.querySelectorAll('ul .value')).map(el => parseInt(el.textContent.trim()));
         
@@ -56,16 +56,20 @@ function processHiddenData() {
 
         if (!canvas) {
             // Создаем новый canvas, если он отсутствует
+            const newBlock = document.createElement('div');
+            document.querySelector('.visualization .graphs').appendChild(newBlock);
             const newCanvas = document.createElement('canvas');
             newCanvas.id = canvasId;
             const newTitle = document.createElement('h2');
             if (title != null) {
                 newTitle.innerText = 'Диаграмма для "' + title.innerText +'"';
+                title = title.innerText
             } else {
                 newTitle.innerText = 'Сравнение параметров';
+                title = 'Сравнение параметров';
             }
-            document.querySelector('.visualization .graphs').appendChild(newTitle);
-            document.querySelector('.visualization .graphs').appendChild(newCanvas);
+            newBlock.appendChild(newTitle);
+            newBlock.appendChild(newCanvas);
             canvas = newCanvas;
         }
 

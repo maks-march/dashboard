@@ -29,6 +29,10 @@ a {
   text-decoration: none;
 }
 
+header {
+  color:var(--main-white);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -100,28 +104,25 @@ main {
 }
 
 .visualization {
-  width: 90%;
+  width: 100%;
   height: fit-content;
   display: flex;
   flex-direction: column;
 }
 
 .graphs {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   height: fit-content;
-  .row {
-    width: 100%;
-    height: fit-content;
+  div {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 8vh;
+    flex-direction: column;
   }
 }
 
 canvas {
-  max-width: 45%;
+  max-width: 50vh;
   max-height: 45vh;
 }
 

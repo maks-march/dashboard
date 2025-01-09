@@ -77,11 +77,10 @@ function to_SQL($table, $conn) {
         $sql = "UPDATE `users` SET `tables_ids` = '".$ids[0]['tables_ids']." ".$table_name." ' WHERE `login` = '".$_COOKIE['log']."';";
         mysqli_query($conn,$sql);
     } catch(Exception $e) {
-        die("Ошибка!");
+        die($e);
     }
 
     foreach ($sheets as $key => $sheet) { 
-        $sheet->getStyle('A1:AA1000')->getAlignment()->setWrapText(false);
         $highestRow = $sheet->getHighestRow(); 
         $highestColumn = $sheet->getHighestColumn();
         $columns = array_keys($sheet->getColumnDimensions());
@@ -126,7 +125,7 @@ function to_SQL($table, $conn) {
                 mysqli_query($conn,$sql);
                 
             } catch(Exception $e) {
-                die("Ошибка!");
+                
             }
         }
         if ($drop_sql != "") {

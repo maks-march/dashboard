@@ -63,7 +63,7 @@
 
     <form method="post" class = "choose_tables">
         <h2>Город(а)</h2>
-        <input class= "choose_tables_input" type="text" required name ="city" list="list-of-city" required placeholder="название, название 2">
+        <input class= "choose_tables_input" type="text" required name ="city" list="list-of-city" required placeholder="название, название 2" <?php if (isset($_POST['city'])) { echo 'value = "'.$_POST['city'].'"'; } ?>>
         <datalist id="list-of-city"> 
         <?php 
                 $cities = array();
@@ -83,7 +83,7 @@
             ?>
         </datalist>
         <h2>Год(а)</h2>
-        <input class= "choose_tables_input" type="text" required name ="year" list="list-of-years" required placeholder="2019, 2021">
+        <input class= "choose_tables_input" type="text" required name ="year" list="list-of-years" required placeholder="2019, 2021" <?php if (isset($_POST['year'])) { echo 'value = "'.$_POST['year'].'"'; } ?>>
         <datalist id="list-of-years">
             <?php 
                 foreach ($years as $key => $year) {
@@ -94,7 +94,7 @@
             ?>
         </datalist>
         <h2>Раздел(ы)</h2>
-        <input class= "choose_tables_input" type="text" list = "list-of-parts" required name ="parts" placeholder="0, 1, 2, 3">
+        <input class= "choose_tables_input" type="text" list = "list-of-parts" required name ="parts" placeholder="0, 1, 2, 3" <?php if (isset($_POST['parts'])) { echo 'value = "'.$_POST['parts'].'"'; } ?>>
         <datalist id="list-of-parts">
             <option value="0">  
             <option value="1">  

@@ -64,6 +64,19 @@ body {
     overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--main-white);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--main-red); 
+    width: 12px;
+}
+
 main {
     margin-top: 3vh;
     width: 90vw;

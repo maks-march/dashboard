@@ -94,15 +94,15 @@
             ?>
         </datalist>
         <h2>Раздел(ы)</h2>
-        <input class= "choose_tables_input" type="text" list = "list-of-parts" required name ="parts" placeholder="0, 1, 2, 3" <?php if (isset($_POST['parts'])) { echo 'value = "'.$_POST['parts'].'"'; } ?>>
+        <input class= "choose_tables_input" type="text" list = "list-of-parts" required name ="parts" placeholder="1, 2, 3" <?php if (isset($_POST['parts'])) { echo 'value = "'.$_POST['parts'].'"'; } ?>>
         <datalist id="list-of-parts">
-            <option value="0">  
             <option value="1">  
             <option value="2">  
             <option value="3">  
             <option value="4">  
             <option value="5">  
             <option value="6"> 
+            <option value="7">  
         </datalist>
         <select name = "type" id="list-of-types">
             <option value="pie">Круговая диаграмма</option>
@@ -130,7 +130,7 @@
                     foreach ($cities as $key1 => $city) {
                         foreach ($years as $key2 => $year) {
                             foreach ($parts as $key3 => $part) {
-                                $filenames[$key1+$key2+$key3+$i] = $city."_".$year.$_COOKIE['log']."list".$part;
+                                $filenames[$key1+$key2+$key3+$i] = $city."_".$year.$_COOKIE['log']."list".intval($part)-1;
                             }
                             $i = $i + 10;
                         }

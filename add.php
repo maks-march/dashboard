@@ -3,7 +3,7 @@
     session_start();
     if (!isset($_COOKIE['log'])) {
         header('Location:index.php');
-    }
+    } 
 ?>
 
 <!DOCTYPE html>

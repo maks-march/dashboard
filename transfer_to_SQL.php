@@ -41,7 +41,7 @@ function upload_file($id, $user, $file, $upload_dir= 'files', $allowed_types= ar
     $max_filesize = 43886080;
     
     if(!is_writable($upload_dir)) 
-        return array('error' => 'Невозможно загрузить файл в папку "'.$upload_dir.'". Установите права доступа - 777.');
+        return array('error' => 'Невозможно загрузить файл в папку "'.$upload_dir.'".');
     
     if(!in_array($filetype, $allowed_types))
         return array('error' => 'Данный тип файла не поддерживается.');

@@ -41,7 +41,12 @@
                 </div>
             </form>
         </div>
-        <div class="error">
+        <div class="navigation">
+            <a href = "index.php?no_start" class="add_files">
+                К файлам
+            </a> 
+        </div>
+        <div class="error" style="display:none">
             <?php            
                 if(isset($_FILES['uploadfile']) && !empty($_FILES['uploadfile']['name'])){
                     include "transfer_to_SQL.php";
@@ -50,11 +55,6 @@
             ?>
         </div>
 
-        <div class="navigation">
-            <a href = "index.php?no_start" class="add_files">
-                К файлам
-            </a> 
-        </div>
     </main>
     <script src="js/add_script.js"></script>
 </body>

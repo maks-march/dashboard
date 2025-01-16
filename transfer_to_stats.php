@@ -5,10 +5,9 @@ function get_sorted($tables) {
     $by_year = array();
     $by_part = array();
     foreach ($tables as $key => $table) {
-        $promo = explode("_", $table);
-        $city = $promo[0];
-        $promo = explode($_COOKIE['log']."list", $promo[1]);
-        $year = $promo[0];
+        $promo = explode($_COOKIE['log']."list", $table);
+        $city = substr($promo[0],0, -5); 
+        $year = substr($promo[0], -4); 
         $part = $promo[1];
         if (array_key_exists($city, $by_city)) {
             if (array_key_exists($part, $by_city[$city])) {

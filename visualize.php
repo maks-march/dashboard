@@ -107,7 +107,7 @@
         <select name = "type" id="list-of-types">
             <option value="pie">Круговая диаграмма</option>
             <option value="bar">Стобчатая диаграмма</option>
-            <option value="gistogramm">Линейная диаграмма</option>
+            <option value="line">Линейная диаграмма</option>
         </select>
         <div class="navigation">
             <a href="index.php?no_start" class = "add_files">

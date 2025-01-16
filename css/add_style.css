@@ -185,3 +185,7 @@ main {
         background-color: var(--main-red);
     }
 }
+
+.error {
+    display: none;
+}
